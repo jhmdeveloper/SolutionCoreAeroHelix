@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SolutionCoreAeroHelix.Models.Locacion>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorarioServicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Geolocalizacion)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorarioServicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Geolocalizacion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.LocacionID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.LocacionID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.LocacionID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

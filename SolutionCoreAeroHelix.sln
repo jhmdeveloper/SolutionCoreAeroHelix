@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionCoreAeroHelix", "SolutionCoreAeroHelix\SolutionCoreAeroHelix.csproj", "{C135FFA7-6013-4CB8-9858-FB8DB2AFA32A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C135FFA7-6013-4CB8-9858-FB8DB2AFA32A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C135FFA7-6013-4CB8-9858-FB8DB2AFA32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C135FFA7-6013-4CB8-9858-FB8DB2AFA32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C135FFA7-6013-4CB8-9858-FB8DB2AFA32A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82244B17-85C6-4EE4-A4D3-6177CE170F57}
+	EndGlobalSection
+EndGlobal

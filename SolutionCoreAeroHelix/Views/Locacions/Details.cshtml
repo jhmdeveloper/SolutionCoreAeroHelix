@@ -1,0 +1,82 @@
+﻿@model SolutionCoreAeroHelix.Models.Locacion
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Locacion</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Direccion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Latitud)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Latitud)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Longitud)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Longitud)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HorarioServicio)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HorarioServicio)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Geolocalizacion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Geolocalizacion)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.LocacionID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

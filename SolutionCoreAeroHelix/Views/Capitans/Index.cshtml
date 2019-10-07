@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SolutionCoreAeroHelix.Models.Capitan>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentarios)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Licencia)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentarios)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Licencia)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CapitanID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.CapitanID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.CapitanID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
