@@ -139,7 +139,7 @@ namespace SolutionCoreAeroHelix.Controllers
                     {
                         Session["UserID"] = user.UsuarioID.ToString();
                         Session["Username"] = usr.UserName.ToString();
-                        return RedirectToAction("Index", "aeronaves");
+                        return RedirectToAction("TableroInicial", "usuarios");
                     }
                     else
                     {
@@ -154,6 +154,20 @@ namespace SolutionCoreAeroHelix.Controllers
                 ModelState.AddModelError("UsuarioInexistente", "Usuario y/o contraseña incorrectos");
                 return View();
             }
+        }
+
+        //Tablero Inicial Usuario
+        public ActionResult TableroInicial()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("~/RecursoNoEncontrado.html");
+            }
+            
         }
 
         protected override void Dispose(bool disposing)
