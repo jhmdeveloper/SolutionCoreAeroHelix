@@ -121,6 +121,41 @@ namespace SolutionCoreAeroHelix.Controllers
             return RedirectToAction("Index");
         }
 
+        //Autenticar
+        public ActionResult Autenticar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Autenticar(Usuario user)
+        {
+            try
+            {
+                using (db)
+                {
+                    var usr = db.Usuarios.Single(u => u.UserName == user.UserName && u.Password == user.Password);
+                    if (usr != null)
+                    {
+                        Session["UserID"] = user.UsuarioID.ToString();
+                        Session["Username"] = usr.UserName.ToString();
+                        return RedirectToAction("Index", "aeronaves");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "<b>Nombre o contraseña incorrectos</b>");
+                    }
+
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("UsuarioInexistente", "Usuario y/o contraseña incorrectos");
+                return View();
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -196,6 +196,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="assets\app\media\img\bg\bg-3.jpg" />
+    <Content Include="assets\app\media\img\logos\AeroHelixLogo160.png" />
+    <Content Include="assets\demo\default\base\scripts.bundle.js" />
+    <Content Include="assets\demo\default\base\style.bundle.css" />
+    <Content Include="assets\demo\default\base\style.bundle.rtl.css" />
+    <Content Include="assets\snippets\custom\pages\user\login - Copy.js" />
+    <Content Include="assets\snippets\custom\pages\user\login.js" />
+    <Content Include="assets\vendors\base\vendors.bundle.css" />
+    <Content Include="assets\vendors\base\vendors.bundle.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -230,6 +239,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="loginaerohelix.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -269,9 +279,11 @@
     <Content Include="Views\Locacions\Details.cshtml" />
     <Content Include="Views\Locacions\Edit.cshtml" />
     <Content Include="Views\Locacions\Index.cshtml" />
+    <Content Include="Views\Usuarios\Autenticar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\media\img\logo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
