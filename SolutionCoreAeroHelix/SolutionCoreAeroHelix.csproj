@@ -422,6 +422,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="loginaerohelix.html" />
+    <Content Include="TableroClienteAeroHelix.html" />
     <Content Include="TableroControlAeroHelix_demo7.html" />
     <Content Include="TableroControlAeroHelix.html" />
     <Content Include="Web.config" />
@@ -465,6 +466,7 @@
     <Content Include="Views\Locacions\Index.cshtml" />
     <Content Include="Views\Usuarios\Autenticar.cshtml" />
     <Content Include="Views\Usuarios\TableroInicial.cshtml" />
+    <Content Include="Views\Clientes\Calendario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

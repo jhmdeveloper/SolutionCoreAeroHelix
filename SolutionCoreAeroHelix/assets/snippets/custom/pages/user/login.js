@@ -54,17 +54,35 @@ var SnippetLogin = (function () {
                         l = $(this).closest("form");
                     l.validate({
                         rules: {
-                            username: { required: !0 },
-                            password: { required: !0 }
+                            username: "required",
+                            password: "required"
+                        },
+                        messages: {
+                            username: "El usuario es requerido",
+                            password: "La contrase&ntilde;a es requerida"
                         }
                     }),
                         l.valid() &&
                         (a
                             .addClass("m-loader m-loader--right m-loader--light")
                             .attr("disabled", !0),
-                        l.ajaxSubmit({
-                            url: "",
-                            success: function (e, t, r, s) {
+                            l.ajaxSubmit({
+                                url: "Usuarios/Autenticar", type: "post",
+                                data: l.serialize(),
+                                success: function (data) {
+                                    if (data.status) {
+                                        location = data.page;
+                                    } else {
+                                        mUtil.scrollTo("m_form_1", -200), swal({
+                                            title: data.title,
+                                            text: data.msg,
+                                            type: "error",
+                                            confirmButtonClass: "btn btn-secondary m-btn m-btn--wide",
+                                            onClose: function (e) {
+                                                a.removeClass("m-loader m-loader--right m-loader--light").removeAttr("disabled");
+                                            }
+                                        });
+                                    }
                                 }
                             }));
                 }),

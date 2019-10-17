@@ -134,25 +134,25 @@ namespace SolutionCoreAeroHelix.Controllers
             {
                 using (db)
                 {
+                    var resultado = new JsonResult();
                     var usr = db.Usuarios.Single(u => u.UserName == user.UserName && u.Password == user.Password);
                     if (usr != null)
                     {
-                        Session["UserID"] = user.UsuarioID.ToString();
+                        Session["UserID"] = usr.UsuarioID.ToString();
                         Session["Username"] = usr.UserName.ToString();
-                        return RedirectToAction("TableroInicial", "usuarios");
+                        resultado = Json(new { status = true, page = "TableroClienteAeroHelix.html" });
                     }
                     else
                     {
-                        ModelState.AddModelError("", "<b>Nombre o contraseña incorrectos</b>");
+                        resultado = Json(new { title = "Autenticación", msg = "Usuario y/o contraseña incorrectos" });
                     }
 
-                    return View();
+                    return resultado;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                ModelState.AddModelError("UsuarioInexistente", "Usuario y/o contraseña incorrectos");
-                return View();
+                return Json(new { title = "Autenticación", msg = "Usuario y/o contraseña incorrectos" });
             }
         }
 

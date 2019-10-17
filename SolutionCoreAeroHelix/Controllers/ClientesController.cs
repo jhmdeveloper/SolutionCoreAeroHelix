@@ -116,6 +116,22 @@ namespace SolutionCoreAeroHelix.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Clientes/Calendario/5
+        public async Task<ActionResult> Calendario()
+        {
+            var id = Convert.ToInt32(Session["UserID"]);
+            if (id == 0)
+            {
+                Response.Redirect("~/loginaerohelix.html", true);
+            }
+            Cliente cliente = await db.Clientes.FindAsync(id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cliente);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
