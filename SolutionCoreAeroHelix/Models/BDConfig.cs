@@ -22,5 +22,7 @@ namespace SolutionCoreAeroHelix.Models
         public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.Capitan> Capitans { get; set; }
 
         public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.Locacion> Locacions { get; set; }
+
+        public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.Reservacion> Reservaciones { get; set; }
     }
 }

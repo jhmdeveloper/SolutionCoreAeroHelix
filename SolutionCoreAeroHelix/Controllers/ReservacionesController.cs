@@ -11,141 +11,109 @@ using SolutionCoreAeroHelix.Models;
 
 namespace SolutionCoreAeroHelix.Controllers
 {
-    public class ClientesController : Controller
+    public class ReservacionesController : Controller
     {
         private BDConfig db = new BDConfig();
 
-        // GET: Clientes
+        // GET: Reservaciones
         public async Task<ActionResult> Index()
         {
-            return View(await db.Clientes.ToListAsync());
+            return View(await db.Reservaciones.ToListAsync());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Reservaciones/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
+            Reservacion reservacion = await db.Reservaciones.FindAsync(id);
+            if (reservacion == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(reservacion);
         }
 
-        // GET: Clientes/Create
+        // GET: Reservaciones/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Reservaciones/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ClienteID,Nombre,RFC,Correo,TelefonoContacto,Direccion,GeoLatitud,GeoLongitud,Estado")] Cliente cliente)
+        public async Task<ActionResult> Create([Bind(Include = "ReservacionID,Fecha,Hora,Personas,Status,Registro,ClienteID")] Reservacion reservacion)
         {
             if (ModelState.IsValid)
             {
-                db.Clientes.Add(cliente);
+                db.Reservaciones.Add(reservacion);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(cliente);
+            return View(reservacion);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Reservaciones/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
+            Reservacion reservacion = await db.Reservaciones.FindAsync(id);
+            if (reservacion == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(reservacion);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Reservaciones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ClienteID,Nombre,RFC,Correo,TelefonoContacto,Direccion,GeoLatitud,GeoLongitud,Estado")] Cliente cliente)
+        public async Task<ActionResult> Edit([Bind(Include = "ReservacionID,Fecha,Hora,Personas,Status,Registro,ClienteID")] Reservacion reservacion)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cliente).State = EntityState.Modified;
+                db.Entry(reservacion).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(cliente);
+            return View(reservacion);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Reservaciones/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
+            Reservacion reservacion = await db.Reservaciones.FindAsync(id);
+            if (reservacion == null)
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+            return View(reservacion);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Reservaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            db.Clientes.Remove(cliente);
+            Reservacion reservacion = await db.Reservaciones.FindAsync(id);
+            db.Reservaciones.Remove(reservacion);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        // GET: Clientes/Calendario/5
-        public async Task<ActionResult> Calendario()
-        {
-            var id = Convert.ToInt32(Session["UserID"]);
-            if (id == 0)
-            {
-                Response.Redirect("~/loginaerohelix.html", true);
-            }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
-        }
-
-        // GET: Clientes/Bolsa/5
-        public async Task<ActionResult> Bolsa()
-        {
-            var id = Convert.ToInt32(Session["UserID"]);
-            if (id == 0)
-            {
-                Response.Redirect("~/loginaerohelix.html", true);
-            }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
         }
 
         protected override void Dispose(bool disposing)

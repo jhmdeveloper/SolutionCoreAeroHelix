@@ -1,6 +1,4 @@
-﻿@model SolutionCoreAeroHelix.Models.Cliente
-
-@{
+﻿@{
     Layout = null;
 }
 
@@ -23,21 +21,21 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- begin::Head -->
 <head>
     <meta charset="utf-8" />
-    <title>Aerohelix | Calendario</title>
+    <title>Aerohelix | Detalle de Bolsa</title>
     <meta name="description" content="Latest updates and statistic charts">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
     <!--begin::Web font -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
     <script>
-        WebFont.load({
-            google: {
-                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
-            },
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
+			WebFont.load({
+				google: {
+					"families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+				},
+				active: function() {
+					sessionStorage.fonts = true;
+				}
+			});
     </script>
 
     <!--end::Web font -->
@@ -56,21 +54,20 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Base Styles -->
     <link rel="shortcut icon" href="~/assets/demo/aerohelix/media/img/logo/favicon.ico" />
     <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-37564768-1', 'auto');
-        ga('send', 'pageview');
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+			ga('create', 'UA-37564768-1', 'auto');
+			ga('send', 'pageview');
     </script>
-
 </head>
 
 <!-- end::Head -->
@@ -548,7 +545,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </span>
                                     </li>
                                     <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                                        <a href="#" class="m-menu__link ">
+                                        <a href="Calendario" class="m-menu__link ">
                                             <i class="m-menu__link-icon la la-calendar-check-o"></i>
                                             <span class="m-menu__link-text">Calendario</span>
                                         </a>
@@ -571,7 +568,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </span>
                                     </li>
                                     <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                                        <a href="Bolsa" class="m-menu__link ">
+                                        <a href="#" class="m-menu__link ">
                                             <i class="m-menu__link-icon la flaticon-piggy-bank"></i>
                                             <span class="m-menu__link-text">Detalle de bolsa</span>
                                         </a>
@@ -603,13 +600,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="m-nav__separator">-</li>
                                 <li class="m-nav__item">
                                     <a href="" class="m-nav__link">
-                                        <span class="m-nav__link-text">Mis reservaciones</span>
+                                        <span class="m-nav__link-text">Mi bolsa</span>
                                     </a>
                                 </li>
                                 <li class="m-nav__separator">-</li>
                                 <li class="m-nav__item">
                                     <a href="" class="m-nav__link">
-                                        <span class="m-nav__link-text">Calendario</span>
+                                        <span class="m-nav__link-text">Bolsa</span>
                                     </a>
                                 </li>
                             </ul>
@@ -628,87 +625,30 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
 
-                <!--begin modal-->
-                <div class="modal fade" id="kt_modal_5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">NUEVA RESERVACIÓN</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group m-form__group row">
-                                        @*<label class="col-form-label col-lg-3 col-sm-12">Input Group Setup</label>*@
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                            <div class="input-group date">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="la la-calendar-check-o"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="text" class="form-control m-input" readonly="" placeholder="Select date" id="m_datepicker_2_modal" data-date-format="dd/mm/yyyy">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        @*<label class="col-form-label col-lg-3 col-sm-12">Current Time</label>*@
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                            <div class="input-group timepicker">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="la la-clock-o"></i>
-                                                    </span>
-                                                </div>
-                                                <input class="form-control m-input" id="m_timepicker_1" readonly="" placeholder="Select time" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        @*<label for="example-number-input" class="col-2 col-form-label">Personas</label>*@
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                            <div class="input-group timepicker">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="la flaticon-users-1"></i>
-                                                    </span>
-                                                </div>
-                                                <input class="form-control m-input" type="number" value="" id="example-number-input">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" id="btnSolicitar">Solicitar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end modal-->
                 <!-- END: Subheader -->
                 <div class="m-content">
+                    <!--Begin::Section-->
                     <div class="row">
-                        <div class="col-lg-12">
 
-                            <!--begin::Portlet-->
-                            <div class="m-portlet" id="m_portlet">
+                        <div class="col-xl-5">
+
+                            <!--begin:: Widgets/Top Products-->
+                            <div class="m-portlet m-portlet--full-height m-portlet--fit ">
                                 <div class="m-portlet__head">
                                     <div class="m-portlet__head-caption">
                                         <div class="m-portlet__head-title">
                                             <span class="m-portlet__head-icon">
-                                                <i class="flaticon-calendar-3"></i>
+                                                <i class="flaticon-piggy-bank"></i>
                                             </span>
                                             <h3 class="m-portlet__head-text">
-                                                Calendario
+                                                Detalle de bolsa
                                             </h3>
                                         </div>
                                     </div>
                                     <div class="m-portlet__head-tools">
                                         <ul class="m-portlet__nav">
                                             <li class="m-portlet__nav-item">
-                                                <a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air" data-toggle="modal" data-target="#kt_modal_5">
+                                                <a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air">
                                                     <span>
                                                         <i class="la la-plus"></i>
                                                         <span>Nueva reservación</span>
@@ -719,13 +659,72 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                 </div>
                                 <div class="m-portlet__body">
-                                    <div id="m_calendar"></div>
+
+                                    <!--begin::Widget5-->
+                                    <div class="m-widget4 m-widget4--chart-bottom" style="min-height: 250px">
+                                        <div class="m-widget4__item">
+                                            <div class="m-widget4__img m-widget4__img--logo">
+                                            </div>
+                                            <div class="m-widget4__info">
+                                                <span class="m-widget4__title">
+                                                    Horas compradas
+                                                </span>
+                                            </div>
+                                            <span class="m-widget4__ext">
+                                                <span class="m-widget4__number m--font-brand">15</span>
+                                            </span>
+                                        </div>
+                                        <div class="m-widget4__item">
+                                            <div class="m-widget4__info">
+                                                <span class="m-widget4__title">
+                                                    Horas utilizadas
+                                                </span>
+                                            </div>
+                                            <span class="m-widget4__ext">
+                                                <span class="m-widget4__number m--font-brand">9</span>
+                                            </span>
+                                        </div>
+                                        <div class="m-widget4__item">
+                                            <div class="m-widget4__info">
+                                                <span class="m-widget4__title">
+                                                    Horas disponibles
+                                                </span>
+                                            </div>
+                                            <span class="m-widget4__ext">
+                                                <span class="m-widget4__number m--font-brand">6</span>
+                                            </span>
+                                        </div>
+
+                                        <!--INICIA-->
+                                        <div class="m-widget25">
+                                            <div class="m-widget25--progress">
+                                                <div class="m-widget25__progress">
+                                                    <span class="m-widget25__progress-number">
+                                                        64%
+                                                    </span>
+                                                    <div class="m--space-10"></div>
+                                                    <div class="progress m-progress--sm">
+                                                        <div class="progress-bar m--bg-accent" role="progressbar" style="width: 64%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <span class="m-widget25__progress-sub">
+                                                        Vigencia hasta 16 de marzo de 2020
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--TERMINA-->
+
+                                    </div>
+
+                                    <!--end::Widget 5-->
                                 </div>
                             </div>
 
-                            <!--end::Portlet-->
+                            <!--end:: Widgets/Top Products-->
                         </div>
                     </div>
+
+                    <!--End::Section-->
                 </div>
             </div>
         </div>
@@ -767,124 +766,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Page Vendors Scripts -->
     <!--begin::Page Snippets -->
     <script src="~/assets/app/js/dashboard.js" type="text/javascript"></script>
-    <!--begin::Page Snippets -->
-    <!--begin::Page Resources -->
-    <script src="~/assets/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
-    <!--end::Page Resources -->
-    <!--begin::Page Resources -->
-    <script src="~/assets/widgets/bootstrap-timepicker.js" type="text/javascript"></script>
-    <!--end::Page Resources -->
-    <script src="~/assets/vendors/custom/fullcalendar/core/main.min.js"></script>
-    <script src="~/assets/vendors/custom/fullcalendar/core/locales-all.js"></script>
-    <script src="~/assets/vendors/custom/fullcalendar/interaction/main.min.js"></script>
-    <script src="~/assets/vendors/custom/fullcalendar/daygrid/main.min.js"></script>
-    <script src="~/assets/vendors/custom/fullcalendar/timegrid/main.min.js"></script>
-    @*<script src="~/assets/vendors/custom/fullcalendar/list/main.min.js"></script>*@
 
-    <script>
-        var calendario;
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('m_calendar');
-            
-            calendario = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['interaction', 'dayGrid', 'timeGrid'],
-                selectable: true,
-                editable: !0,
-                locale: "es",
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: ''
-                },
-                dateClick: function (info) {
-                    showModal(info.dateStr);
-                }
-            });
-
-            calendario.render();
-        });
-
-        function addEvent(fecha, hora, personas) {
-            var _date = new Date(fecha + 'T00:00:00');
-            
-            calendario.addEvent({
-                title: 'Reservacion',
-                start: _date,
-                allDay: true,
-                className: "m-fc-event--light m-fc-event--solid-success",
-                description: "Personas:" + personas
-            });
-
-            $("#m_datepicker_2_modal").val(getCurrentDate());
-            $("#m_timepicker_1").val(getTime());
-            $("#example-number-input").val("");
-            $("#kt_modal_5").modal("hide");
-        }
-
-        function showModal(date) {
-            var _date = new Date(date + 'T00:00:00');
-
-            if (!isNaN(_date.valueOf())) { // valid?
-                $("#m_datepicker_2_modal").val(getDate(_date));
-            } else {
-                $("#m_datepicker_2_modal").val(getCurrentDate());
-            }
-
-            $("#m_timepicker_1").val(getTime());
-
-            $("#example-number-input").val("");
-            
-            $("#kt_modal_5").modal("show");
-        }
-
-        function getTime() {
-            var today = new Date();
-            var hours = today.getHours() % 12 || 12;
-            var minutes = today.getMinutes();
-            var meridian = today.getHours() >= 12 ? ' PM' : ' AM';
-            var time = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0') + meridian;
-
-            return time;
-        }
-
-
-        function getDate(dateTime) {
-            var _date = new Date(dateTime);
-            var year = _date.getFullYear();
-            var month = _date.getMonth() + 1;
-            var day = _date.getDate();
-            var date = day.toString().padStart(2, '0') + '/' + month.toString().padStart(2, '0') + '/' + year;
-
-            return date;
-        }
-
-        function getCurrentDate() {
-            var date = new Date();
-
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            var today = day.toString().padStart(2, '0') + '/' + month.toString().padStart(2, '0') + '/' + year;
-
-            $("#m_datepicker_2_modal").val(today);
-
-            return today;
-        }
-
-        $(document).ready(function () {
-            $("#btnSolicitar").click(function () {
-                var arrFecha = $("#m_datepicker_2_modal").val().split("/");
-
-                var fecha = arrFecha[2] + '-' + arrFecha[1].padStart(2, '0') + '-' + arrFecha[0].padStart(2, '0');
-                
-                var hora = $("#m_timepicker_1").val();
-                var personas = $("#example-number-input").val();
-                
-                addEvent(fecha, hora, personas);
-            });
-        });
-    </script>
     <!--end::Page Snippets -->
 </body>
 

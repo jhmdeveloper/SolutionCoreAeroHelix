@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocacionsController.cs" />
+    <Compile Include="Controllers\ReservacionesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,6 +192,7 @@
     <Compile Include="Models\Capitan.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Locacion.cs" />
+    <Compile Include="Models\Reservacion.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -349,8 +351,35 @@
     <Content Include="assets\vendors\base\images\owl.carousel\owl.video.play.png" />
     <Content Include="assets\vendors\base\vendors.bundle.css" />
     <Content Include="assets\vendors\base\vendors.bundle.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\core\locales-all.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\core\main.min.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\daygrid\main.min.js" />
     <Content Include="assets\vendors\custom\fullcalendar\fullcalendar.bundle.css" />
     <Content Include="assets\vendors\custom\fullcalendar\fullcalendar.bundle.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\interaction\main.min.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\list\main.min.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\timegrid\main.min.js" />
+    <Content Include="assets\widgets\autosize.js" />
+    <Content Include="assets\widgets\bootstrap-datepicker.js" />
+    <Content Include="assets\widgets\bootstrap-daterangepicker.js" />
+    <Content Include="assets\widgets\bootstrap-datetimepicker.js" />
+    <Content Include="assets\widgets\bootstrap-markdown.js" />
+    <Content Include="assets\widgets\bootstrap-maxlength.js" />
+    <Content Include="assets\widgets\bootstrap-multipleselectsplitter.js" />
+    <Content Include="assets\widgets\bootstrap-select.js" />
+    <Content Include="assets\widgets\bootstrap-switch.js" />
+    <Content Include="assets\widgets\bootstrap-timepicker.js" />
+    <Content Include="assets\widgets\bootstrap-touchspin.js" />
+    <Content Include="assets\widgets\clipboard.js" />
+    <Content Include="assets\widgets\dropzone.js" />
+    <Content Include="assets\widgets\form-repeater.js" />
+    <Content Include="assets\widgets\google-recaptcha.js" />
+    <Content Include="assets\widgets\input-mask.js" />
+    <Content Include="assets\widgets\ion-range-slider.js" />
+    <Content Include="assets\widgets\nouislider.js" />
+    <Content Include="assets\widgets\select2.js" />
+    <Content Include="assets\widgets\summernote.js" />
+    <Content Include="assets\widgets\typeahead.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -467,6 +496,7 @@
     <Content Include="Views\Usuarios\Autenticar.cshtml" />
     <Content Include="Views\Usuarios\TableroInicial.cshtml" />
     <Content Include="Views\Clientes\Calendario.cshtml" />
+    <Content Include="Views\Clientes\Bolsa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
