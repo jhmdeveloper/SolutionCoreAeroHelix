@@ -76,7 +76,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.LocacionOrigenID, "LocacionOrigenID", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("LocacionOrigenID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionOrigen", onchange = "SelectedIndexChanged()" })
+                                @Html.DropDownList("LocacionOrigenID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionOrigen", onchange = "ddlOrigenSelectedIndexChanged()" })
                                 @Html.ValidationMessageFor(model => model.LocacionOrigenID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                         <div class="form-group" id="divDireccionOrigenOtro" style="display:none">
                             @Html.LabelFor(model => model.DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.DireccionOrigen, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.DireccionOrigen, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionOrigen" } })
                                 @Html.ValidationMessageFor(model => model.DireccionOrigen, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.LocacionDestinoID, "LocacionDestinoID", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("LocacionDestinoID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionDestino", onchange = "SelectedIndexChanged()" })
+                                @Html.DropDownList("LocacionDestinoID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionDestino", onchange = "ddlDestinoSelectedIndexChanged()" })
                                 @Html.ValidationMessageFor(model => model.LocacionDestinoID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                         <div class="form-group" id="divDireccionDestinoOtro" style="display:none">
                             @Html.LabelFor(model => model.DireccionDestino, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.DireccionDestino, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.DireccionDestino, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionDestino" } })
                                 @Html.ValidationMessageFor(model => model.DireccionDestino, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -198,51 +198,26 @@
 
 <script type="text/javascript">
 
-    function ValidaDirecciones() {
-        var hdnOrigenValue = document.getElementById("hdnLocacionOrigenID").value;
-        if (hdnOrigenValue <= 0)
-            alert('Direccion origen no valida');
-    };
+ 
 
-    function SelectedIndexChanged() {
-
-        //var x = document.getElementById("ddlLocacionOrigen");
-        //var option = document.createElement("option");
-        //option.text = "Otra dirección";
-        //x.add(option);
-
+    function ddlOrigenSelectedIndexChanged() {
         //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
-        var e = document.getElementById("ddlLocacionOrigen");
-        var locOrigenValue = e.options[e.selectedIndex].value;
+        var o = document.getElementById("ddlLocacionOrigen");
+        var locOrigenValue = o.options[o.selectedIndex].value;
         document.getElementById("hdnLocacionOrigenID").value = locOrigenValue;
         var hdnOrigenValue = document.getElementById("hdnLocacionOrigenID").value;
 
         if (hdnOrigenValue == 0) {
             alert('Debes capturar una dirección origen.');
             $("#divDireccionOrigenOtro").show("slow", function () {
+                enviaDireccionOrigen('');
             });
         }
         else {
             $("#divDireccionOrigenOtro").hide("slow", function () {
+                enviaDireccionOrigen(o.options[o.selectedIndex].text);
             });
         }
-
-        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
-        var e = document.getElementById("ddlLocacionDestino");
-        var locDestinoValue = e.options[e.selectedIndex].value;
-        document.getElementById("hdnLocacionDestinoID").value = locDestinoValue;
-        var hdnDestinoValue = document.getElementById("hdnLocacionDestinoID").value;
-
-        if (hdnDestinoValue == 0) {
-            alert('Debes capturar una dirección destino.');
-            $("#divDireccionDestinoOtro").show("slow", function () {
-            });
-        }
-        else {
-            $("#divDireccionDestinoOtro").hide("slow", function () {
-            });
-        }
-
         @*$.ajax({
 
             //url: "/reservaciones/ObtenerDireccion?idDireccion=2",
@@ -270,6 +245,38 @@
             }
         });*@
     };
+
+    function ddlDestinoSelectedIndexChanged() {
+      
+        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
+        var d = document.getElementById("ddlLocacionDestino");
+        var locDestinoValue = d.options[d.selectedIndex].value;
+        document.getElementById("hdnLocacionDestinoID").value = locDestinoValue;
+        var hdnDestinoValue = document.getElementById("hdnLocacionDestinoID").value;
+
+        if (hdnDestinoValue == 0) {
+            alert('Debes capturar una dirección destino.');
+            $("#divDireccionDestinoOtro").show("slow", function () {
+                enviaDireccionDestino('');
+            });
+        }
+        else {
+            $("#divDireccionDestinoOtro").hide("slow", function () {
+                enviaDireccionDestino(d.options[d.selectedIndex].text);
+            });
+        }
+
+    };
+
+    function enviaDireccionOrigen(direccion) {
+        document.getElementById("txtDireccionOrigen").value = direccion;
+    }
+
+    function enviaDireccionDestino(direccion) {
+        document.getElementById("txtDireccionDestino").value = direccion;
+    }
+
+   
 
 </script>
 

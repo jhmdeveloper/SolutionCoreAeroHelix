@@ -494,8 +494,7 @@
     <Content Include="Views\Bolsas\Details.cshtml" />
     <Content Include="Views\Bolsas\Edit.cshtml" />
     <Content Include="Views\Bolsas\Index.cshtml" />
-    <Content Include="Views\Reservaciones\ViewReservacionModel.cshtml" />
-    <Content Include="Views\Reservaciones\ViewEditModel.cshtml" />
+    <Content Include="Views\Reservaciones\CreateResrvaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

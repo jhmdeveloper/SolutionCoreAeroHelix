@@ -20,18 +20,24 @@ namespace SolutionCoreAeroHelix.Models
         public virtual Locacion LocacionOrigen { get; set; }
         public virtual Locacion LocacionDestino { get; set; }
 
+        [Required(ErrorMessage = "Fecha y hora requerida.")]
         public DateTime FechaHora { get; set; }
 
+        [Required(ErrorMessage = "Total de pasajeros requerido.")]
         public int TotalPasajeros { get; set; }
 
+        [Required(ErrorMessage = "Dirección origen requerida.")]
         public string DireccionOrigen { get; set; }
+
+        [Required(ErrorMessage = "Dirección destino requerida.")]
         public string DireccionDestino { get; set; }
 
+        [Required(ErrorMessage = "Duración vuelo requerido.")]
         public int DuracionVuelo { get; set; }
 
         public bool Equipaje { get; set; }
 
-        [Required(ErrorMessage = "Comentarios Requerido.")]
+        [Required(ErrorMessage = "Comentarios Requeridos.")]
         public string Comentarios { get; set; }
 
         public int Status { get; set; }
