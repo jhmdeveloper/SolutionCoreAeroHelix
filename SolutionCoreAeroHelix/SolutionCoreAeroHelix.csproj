@@ -168,10 +168,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AeronavesController.cs" />
+    <Compile Include="Controllers\BolsasController.cs" />
     <Compile Include="Controllers\CapitansController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocacionsController.cs" />
+    <Compile Include="Controllers\ReservacionesController.cs" />
+    <Compile Include="Controllers\RutasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -188,9 +191,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aeronave.cs" />
     <Compile Include="Models\BDConfig.cs" />
+    <Compile Include="Models\Bolsa.cs" />
     <Compile Include="Models\Capitan.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Locacion.cs" />
+    <Compile Include="Models\Reservacion.cs" />
+    <Compile Include="Models\Ruta.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -304,7 +310,11 @@
     <Content Include="assets\demo\aerohelix\base\style.bundle.css" />
     <Content Include="assets\demo\default\base\scripts.bundle.js" />
     <Content Include="assets\demo\default\base\style.bundle.css" />
-    <Content Include="assets\demo\default\base\style.bundle.rtl.css" />
+    <Content Include="assets\demo\default\custom\crud\datatables\basic\paginations.js" />
+    <Content Include="assets\demo\default\custom\crud\datatables\basic\paginations__.js" />
+    <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-datetimepicker.js" />
+    <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-touchspin.js" />
+    <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-touchspin_.js" />
     <Content Include="assets\media\img\logo\AeroHelixLogo56.png" />
     <Content Include="assets\plugins\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="assets\plugins\bootstrap\dist\js\bootstrap.bundle.min.js" />
@@ -349,6 +359,8 @@
     <Content Include="assets\vendors\base\images\owl.carousel\owl.video.play.png" />
     <Content Include="assets\vendors\base\vendors.bundle.css" />
     <Content Include="assets\vendors\base\vendors.bundle.js" />
+    <Content Include="assets\vendors\custom\datatables\datatables.bundle.css" />
+    <Content Include="assets\vendors\custom\datatables\datatables.bundle.js" />
     <Content Include="assets\vendors\custom\fullcalendar\fullcalendar.bundle.css" />
     <Content Include="assets\vendors\custom\fullcalendar\fullcalendar.bundle.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -465,6 +477,25 @@
     <Content Include="Views\Locacions\Index.cshtml" />
     <Content Include="Views\Usuarios\Autenticar.cshtml" />
     <Content Include="Views\Usuarios\TableroInicial.cshtml" />
+    <Content Include="Views\Shared\_MasterAdmin.cshtml" />
+    <Content Include="Views\Usuarios\Demo.cshtml" />
+    <Content Include="Views\Rutas\Create.cshtml" />
+    <Content Include="Views\Rutas\Delete.cshtml" />
+    <Content Include="Views\Rutas\Details.cshtml" />
+    <Content Include="Views\Rutas\Edit.cshtml" />
+    <Content Include="Views\Rutas\Index.cshtml" />
+    <Content Include="Views\Reservaciones\Create.cshtml" />
+    <Content Include="Views\Reservaciones\Delete.cshtml" />
+    <Content Include="Views\Reservaciones\Details.cshtml" />
+    <Content Include="Views\Reservaciones\Edit.cshtml" />
+    <Content Include="Views\Reservaciones\Index.cshtml" />
+    <Content Include="Views\Bolsas\Create.cshtml" />
+    <Content Include="Views\Bolsas\Delete.cshtml" />
+    <Content Include="Views\Bolsas\Details.cshtml" />
+    <Content Include="Views\Bolsas\Edit.cshtml" />
+    <Content Include="Views\Bolsas\Index.cshtml" />
+    <Content Include="Views\Reservaciones\ViewReservacionModel.cshtml" />
+    <Content Include="Views\Reservaciones\ViewEditModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,5 +27,7 @@ namespace SolutionCoreAeroHelix.Models
 
         public int ClienteID { get; set; }
         public virtual Cliente cliente { get; set; }
+
+        public virtual ICollection<Reservacion> reservaciones { get; set; }
     }
 }

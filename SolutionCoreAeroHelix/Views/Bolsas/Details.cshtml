@@ -1,0 +1,43 @@
+﻿@model SolutionCoreAeroHelix.Models.Bolsa
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MasterAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bolsa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cliente.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cliente.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Minutos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Minutos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinutosRestantes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinutosRestantes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BolsaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

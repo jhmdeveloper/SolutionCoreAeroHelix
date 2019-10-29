@@ -11,6 +11,7 @@ namespace SolutionCoreAeroHelix.Models
         [Key]
         public int AeronaveID { get; set; }
 
+
         [Required(ErrorMessage = "Nombre Requerido.")]
         public string Nombre { get; set; }
 

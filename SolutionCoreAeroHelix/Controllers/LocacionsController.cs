@@ -18,28 +18,49 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Locacions
         public async Task<ActionResult> Index()
         {
-            return View(await db.Locacions.ToListAsync());
+            if (Session["UserID"] != null)
+            {
+                return View(await db.Locacions.ToListAsync());
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
         }
 
         // GET: Locacions/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Locacion locacion = await db.Locacions.FindAsync(id);
+                if (locacion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(locacion);
             }
-            Locacion locacion = await db.Locacions.FindAsync(id);
-            if (locacion == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(locacion);
         }
 
         // GET: Locacions/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
         }
 
         // POST: Locacions/Create
@@ -62,16 +83,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Locacions/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Locacion locacion = await db.Locacions.FindAsync(id);
+                if (locacion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(locacion);
             }
-            Locacion locacion = await db.Locacions.FindAsync(id);
-            if (locacion == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(locacion);
         }
 
         // POST: Locacions/Edit/5
@@ -93,16 +121,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Locacions/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Locacion locacion = await db.Locacions.FindAsync(id);
+                if (locacion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(locacion);
             }
-            Locacion locacion = await db.Locacions.FindAsync(id);
-            if (locacion == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(locacion);
         }
 
         // POST: Locacions/Delete/5

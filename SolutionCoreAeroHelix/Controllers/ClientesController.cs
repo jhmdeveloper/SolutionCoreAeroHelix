@@ -18,28 +18,49 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Clientes
         public async Task<ActionResult> Index()
         {
-            return View(await db.Clientes.ToListAsync());
+            if (Session["UserID"] != null)
+            {
+                return View(await db.Clientes.ToListAsync());
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
         }
 
         // GET: Clientes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cliente cliente = await db.Clientes.FindAsync(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cliente);
             }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(cliente);
         }
 
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
         }
 
         // POST: Clientes/Create
@@ -62,16 +83,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Clientes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cliente cliente = await db.Clientes.FindAsync(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cliente);
             }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(cliente);
         }
 
         // POST: Clientes/Edit/5
@@ -93,16 +121,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Clientes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Cliente cliente = await db.Clientes.FindAsync(id);
+                if (cliente == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(cliente);
             }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(cliente);
         }
 
         // POST: Clientes/Delete/5

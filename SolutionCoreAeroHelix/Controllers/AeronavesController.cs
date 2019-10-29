@@ -18,28 +18,50 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Aeronaves
         public async Task<ActionResult> Index()
         {
-            return View(await db.Aeronaves.ToListAsync());
+            if (Session["UserID"] != null)
+            {
+                return View(await db.Aeronaves.ToListAsync());
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
         }
 
         // GET: Aeronaves/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Aeronave aeronave = await db.Aeronaves.FindAsync(id);
+                if (aeronave == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(aeronave);
             }
-            Aeronave aeronave = await db.Aeronaves.FindAsync(id);
-            if (aeronave == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(aeronave);
         }
 
         // GET: Aeronaves/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
+
         }
 
         // POST: Aeronaves/Create
@@ -62,16 +84,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Aeronaves/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Aeronave aeronave = await db.Aeronaves.FindAsync(id);
+                if (aeronave == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(aeronave);
             }
-            Aeronave aeronave = await db.Aeronaves.FindAsync(id);
-            if (aeronave == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(aeronave);
         }
 
         // POST: Aeronaves/Edit/5
@@ -93,16 +122,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Aeronaves/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Aeronave aeronave = await db.Aeronaves.FindAsync(id);
+                if (aeronave == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(aeronave);
             }
-            Aeronave aeronave = await db.Aeronaves.FindAsync(id);
-            if (aeronave == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(aeronave);
         }
 
         // POST: Aeronaves/Delete/5

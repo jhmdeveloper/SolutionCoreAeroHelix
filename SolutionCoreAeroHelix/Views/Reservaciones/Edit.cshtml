@@ -1,0 +1,282 @@
+﻿@model SolutionCoreAeroHelix.Models.Reservacion
+
+@{
+    ViewBag.Title = "Registro de Reservaciones";
+    Layout = "~/Views/Shared/_MasterAdmin.cshtml";
+}
+
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">Reservaciones</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Edición</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                <span class="m-subheader__daterange-label">
+                    <span class="m-subheader__daterange-title"></span>
+                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                </span>
+                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                    <i class="la la-angle-down"></i>
+                </a>
+
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="col-lg-6">
+        <!--begin::Portlet-->
+        <div class="m-portlet">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <span class="m-portlet__head-icon m--hide">
+                            <i class="la la-gear"></i>
+                        </span>
+                        <h3 class="m-portlet__head-text">
+                            Información de Reservación
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            @using (Html.BeginForm("Edit", "Reservaciones",
+               new { ReturnUrl = ViewBag.ReturnUrl },
+               FormMethod.Post, new { @class = "m-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="m-portlet__body">
+                    <div class="m-form__section m-form__section--first">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ReservacionID)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UsuarioID, "UsuarioID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("UsuarioID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UsuarioID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FechaHora, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LocacionOrigenID, "LocacionOrigenID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("LocacionOrigenID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionOrigen", onchange = "SelectedIndexChanged()" })
+                                @Html.ValidationMessageFor(model => model.LocacionOrigenID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" id="divDireccionOrigenOtro" style="display:none">
+                            @Html.LabelFor(model => model.DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DireccionOrigen, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DireccionOrigen, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LocacionDestinoID, "LocacionDestinoID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("LocacionDestinoID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionDestino", onchange = "SelectedIndexChanged()" })
+                                @Html.ValidationMessageFor(model => model.LocacionDestinoID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="divDireccionDestinoOtro" style="display:none">
+                            @Html.LabelFor(model => model.DireccionDestino, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DireccionDestino, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DireccionDestino, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DuracionVuelo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DuracionVuelo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DuracionVuelo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TotalPasajeros, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TotalPasajeros, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TotalPasajeros, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Equipaje, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Equipaje)
+                                    @Html.ValidationMessageFor(model => model.Equipaje, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Comentarios, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            Selecciona opción
+                            <div class="col-md-10">
+                                @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                <div class="m-radio-list">
+                                    <label class="m-radio m-radio--solid m-radio--state-success">
+                                        <input type="radio" name="Status" value="2" checked="checked"> Confirmar
+                                        <span></span>
+                                    </label>
+                                    <label class="m-radio m-radio--solid m-radio--state-metal">
+                                        <input type="radio" name="Status" value="3"> Cancelar
+                                        <span></span>
+                                    </label>
+                                    <label class="m-radio m-radio--solid m-radio--danger">
+                                        <input type="radio" name="Status" value="4"> Rechazar
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="hdnLocacionOrigenID" name="hdnLocacionOrigenID" value="0">
+                        <input type="hidden" id="hdnLocacionDestinoID" name="hdnLocacionDestinoID" value="0">
+
+                    </div>
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions m-form__actions">
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Actualizar" class="btn btn-primary" />
+
+                                    @Html.ActionLink("Cancelar", "Index")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <!--end::Portlet-->
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function ValidaDirecciones() {
+        var hdnOrigenValue = document.getElementById("hdnLocacionOrigenID").value;
+        if (hdnOrigenValue <= 0)
+            alert('Direccion origen no valida');
+    };
+
+    function SelectedIndexChanged() {
+
+        //var x = document.getElementById("ddlLocacionOrigen");
+        //var option = document.createElement("option");
+        //option.text = "Otra dirección";
+        //x.add(option);
+
+        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
+        var e = document.getElementById("ddlLocacionOrigen");
+        var locOrigenValue = e.options[e.selectedIndex].value;
+        document.getElementById("hdnLocacionOrigenID").value = locOrigenValue;
+        var hdnOrigenValue = document.getElementById("hdnLocacionOrigenID").value;
+
+        if (hdnOrigenValue == 0) {
+            alert('Debes capturar una dirección origen.');
+            $("#divDireccionOrigenOtro").show("slow", function () {
+            });
+        }
+        else {
+            $("#divDireccionOrigenOtro").hide("slow", function () {
+            });
+        }
+
+        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
+        var e = document.getElementById("ddlLocacionDestino");
+        var locDestinoValue = e.options[e.selectedIndex].value;
+        document.getElementById("hdnLocacionDestinoID").value = locDestinoValue;
+        var hdnDestinoValue = document.getElementById("hdnLocacionDestinoID").value;
+
+        if (hdnDestinoValue == 0) {
+            alert('Debes capturar una dirección destino.');
+            $("#divDireccionDestinoOtro").show("slow", function () {
+            });
+        }
+        else {
+            $("#divDireccionDestinoOtro").hide("slow", function () {
+            });
+        }
+
+        @*$.ajax({
+
+            //url: "/reservaciones/ObtenerDireccion?idDireccion=2",
+            url:'@Url.Action("ObtenerDireccion", "Reservaciones")',
+            type: 'post',
+            datatype: 'application/json',
+            data: "",
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                //alert('success');
+                //$("#partialDiv").html(data);
+                if (response.success) {
+                    alert(response.responseText);
+                } else {
+                    // DoSomethingElse()
+                    alert(response.responseText);
+                }
+            },
+            failure: function (data) {
+                alert('failure');
+            },
+            error: function () {
+                alert('Ajax error!');
+            }
+        });*@
+    };
+
+</script>
+
