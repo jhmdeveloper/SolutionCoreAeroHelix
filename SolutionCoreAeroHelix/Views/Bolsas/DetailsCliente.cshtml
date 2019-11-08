@@ -1,0 +1,147 @@
+﻿@model IEnumerable<SolutionCoreAeroHelix.Models.Bolsa>
+
+@{
+    ViewBag.Title = "DetalleCliente";
+    Layout = "~/Views/Shared/_MasterCliente.cshtml";
+}
+
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">Inicio</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Mi bolsa</span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Bolsa</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                <span class="m-subheader__daterange-label">
+                    <span class="m-subheader__daterange-title"></span>
+                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                </span>
+                <!-- <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                    <i class="la la-angle-down"></i>
+                </a> -->
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- END: Subheader -->
+<div class="m-content">
+    <!--Begin::Section-->
+    <div class="row">
+
+        <div class="col-xl-5">
+
+            <!--begin:: Widgets/Top Products-->
+            <div class="m-portlet m-portlet--full-height m-portlet--fit ">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="flaticon-piggy-bank"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                Detalle de bolsa
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air">
+                                    <span>
+                                        <i class="la la-plus"></i>
+                                        <span>Nueva reservación</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+
+                    <!--begin::Widget5-->
+                    <div class="m-widget4 m-widget4--chart-bottom" style="min-height: 250px">
+                        <div class="m-widget4__item">
+                            <div class="m-widget4__img m-widget4__img--logo">
+                            </div>
+                            <div class="m-widget4__info">
+                                <span class="m-widget4__title">
+                                    Horas compradas
+                                </span>
+                            </div>
+                            <span class="m-widget4__ext">
+                                <span class="m-widget4__number m--font-brand">15</span>
+                            </span>
+                        </div>
+                        <div class="m-widget4__item">
+                            <div class="m-widget4__info">
+                                <span class="m-widget4__title">
+                                    Horas utilizadas
+                                </span>
+                            </div>
+                            <span class="m-widget4__ext">
+                                <span class="m-widget4__number m--font-brand">9</span>
+                            </span>
+                        </div>
+                        <div class="m-widget4__item">
+                            <div class="m-widget4__info">
+                                <span class="m-widget4__title">
+                                    Horas disponibles
+                                </span>
+                            </div>
+                            <span class="m-widget4__ext">
+                                <span class="m-widget4__number m--font-brand">6</span>
+                            </span>
+                        </div>
+
+                        <!--INICIA-->
+                        <div class="m-widget25">
+                            <div class="m-widget25--progress">
+                                <div class="m-widget25__progress">
+                                    <span class="m-widget25__progress-number">
+                                        64%
+                                    </span>
+                                    <div class="m--space-10"></div>
+                                    <div class="progress m-progress--sm">
+                                        <div class="progress-bar m--bg-accent" role="progressbar" style="width: 64%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="m-widget25__progress-sub">
+                                        Vigencia hasta 16 de marzo de 2020
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--TERMINA-->
+
+                    </div>
+
+                    <!--end::Widget 5-->
+                </div>
+            </div>
+
+            <!--end:: Widgets/Top Products-->
+        </div>
+    </div>
+
+    <!--End::Section-->
+</div>

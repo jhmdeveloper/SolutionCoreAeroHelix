@@ -621,67 +621,103 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="m-subheader__daterange-date m--font-brand"></span>
                                 </span>
                                 <!-- <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                                    <i class="la la-angle-down"></i>
-                                </a> -->
+                        <i class="la la-angle-down"></i>
+                    </a> -->
                             </span>
                         </div>
                     </div>
                 </div>
 
                 <!--begin modal-->
-                <div class="modal fade" id="kt_modal_5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-sm" role="document">
+                <div class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">NUEVA RESERVACIÓN</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="exampleModalLabel">Información de Reservación</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <div class="form-group m-form__group row">
-                                        @*<label class="col-form-label col-lg-3 col-sm-12">Input Group Setup</label>*@
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                            <div class="input-group date">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="la la-calendar-check-o"></i>
-                                                    </span>
-                                                </div>
-                                                <input type="text" class="form-control m-input" readonly="" placeholder="Select date" id="m_datepicker_2_modal" data-date-format="dd/mm/yyyy">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="LocacionOrigenID">Origen</label>
+                                        <div class="col-md-10">
+                                            <select class="form-control" id="ddlLocacionOrigen" name="LocacionOrigenID" onchange="ddlOrigenSelectedIndexChanged()">
+                                                <option value="-1">Seleccionar...</option>
+                                                <option value="0">Otra dirección</option>
+                                            </select>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="LocacionOrigenID" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="LocacionDestinoID">Destino</label>
+                                        <div class="col-md-10">
+                                            <select class="form-control" id="ddlLocacionDestino" name="LocacionDestinoID" onchange="ddlDestinoSelectedIndexChanged()">
+                                                <option value="-1">Seleccionar...</option>
+                                                <option value="0">Otra dirección</option>
+                                            </select>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="LocacionDestinoID" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-10" for="FechaHora">Fecha y hora</label>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" id="m_datetimepicker_1" readonly="" placeholder="Elige fecha y hora" name="FechaHora">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="FechaHora" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="DuracionVuelo">Duración</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field DuracionVuelo must be a number." data-val-required="Duración vuelo requerido." id="DuracionVuelo" name="DuracionVuelo" type="number" value="">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="DuracionVuelo" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="Equipaje">Equipaje</label>
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                <input class="check-box" data-val="true" data-val-required="El campo Equipaje es obligatorio." id="Equipaje" name="Equipaje" type="checkbox" value="true"><input name="Equipaje" type="hidden" value="false">
+                                                <span class="field-validation-valid text-danger" data-valmsg-for="Equipaje" data-valmsg-replace="true"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        @*<label class="col-form-label col-lg-3 col-sm-12">Current Time</label>*@
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                            <div class="input-group timepicker">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="la la-clock-o"></i>
-                                                    </span>
-                                                </div>
-                                                <input class="form-control m-input" id="m_timepicker_1" readonly="" placeholder="Select time" type="text">
-                                            </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="TotalPasajeros">Pasajeros</label>
+                                        <div class="col-md-10">
+                                            <div class="input-group bootstrap-touchspin"><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="m_touchspin_1" type="text" class="form-control" value="1" name="TotalPasajeros" placeholder="Select time" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-up" type="button">+</button></span></div>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="TotalPasajeros" data-valmsg-replace="true"></span>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        @*<label for="example-number-input" class="col-2 col-form-label">Personas</label>*@
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                            <div class="input-group timepicker">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="la flaticon-users-1"></i>
-                                                    </span>
-                                                </div>
-                                                <input class="form-control m-input" type="number" value="" id="example-number-input">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="Comentarios">Comentarios</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control text-box single-line" data-val="true" data-val-required="Comentarios Requeridos." id="Comentarios" name="Comentarios" type="text" value="">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Comentarios" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="Status">Status</label>
+                                        <div class="col-md-10">
+
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Status" data-valmsg-replace="true"></span>
+                                            <div class="m-radio-list">
+                                                <label class="m-radio m-radio--solid m-radio--state-warning">
+                                                    <input type="radio" name="Status" value="1" checked="checked" onclick="alert(1);"> Pendiente
+                                                    <span></span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" id="btnSolicitar">Solicitar</button>
+                                <div class="form-group">
+                                    <input type="submit" value="Agregar" class="btn btn-primary" id="btnAgregar">
+
+                                    <a href="/Clientes/Calendario">Cancelar</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -708,7 +744,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div class="m-portlet__head-tools">
                                         <ul class="m-portlet__nav">
                                             <li class="m-portlet__nav-item">
-                                                <a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air" data-toggle="modal" data-target="#kt_modal_5">
+                                                <a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air" data-toggle="modal" data-target="#m_modal_1">
                                                     <span>
                                                         <i class="la la-plus"></i>
                                                         <span>Nueva reservación</span>
@@ -819,7 +855,7 @@ License: You must have a valid license purchased only from themeforest(the above
             $("#m_datepicker_2_modal").val(getCurrentDate());
             $("#m_timepicker_1").val(getTime());
             $("#example-number-input").val("");
-            $("#kt_modal_5").modal("hide");
+            $("#m_modal_1").modal("hide");
         }
 
         function showModal(date) {
@@ -835,7 +871,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
             $("#example-number-input").val("");
             
-            $("#kt_modal_5").modal("show");
+            $("#m_modal_1").modal("show");
         }
 
         function getTime() {
@@ -873,7 +909,7 @@ License: You must have a valid license purchased only from themeforest(the above
         }
 
         $(document).ready(function () {
-            $("#btnSolicitar").click(function () {
+            $("#btnAgregar").click(function () {
                 var arrFecha = $("#m_datepicker_2_modal").val().split("/");
 
                 var fecha = arrFecha[2] + '-' + arrFecha[1].padStart(2, '0') + '-' + arrFecha[0].padStart(2, '0');

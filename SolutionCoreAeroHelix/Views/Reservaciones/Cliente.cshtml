@@ -1,0 +1,398 @@
+﻿@model IEnumerable<SolutionCoreAeroHelix.Models.Reservacion>
+
+@{
+    ViewBag.Title = "Reservaciones";
+    Layout = "~/Views/Shared/_MasterCliente.cshtml";
+}
+
+<!--BEGIN: Modal-->
+<div class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Información de Reservación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            @using (Html.BeginForm("Cliente", "Reservaciones",
+                new { ReturnUrl = ViewBag.ReturnUrl },
+                FormMethod.Post, new { @class = "m-login__form m-form", @id = "m_form_1" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="form-group has-danger">
+                        @Html.LabelFor(model => model.FirstOrDefault().LocacionOrigenID, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <select class="form-control" id="LocacionOrigenID" name="LocacionOrigenID">
+                                <option value="">Seleccionar...</option>
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.LocacionOrigenID)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-danger" id="divDireccionOrigenOtro" style="display:none">
+                        @Html.LabelFor(model => model.FirstOrDefault().DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FirstOrDefault().DireccionOrigen, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionOrigen" } })
+                            @Html.ValidationMessageFor(model => model.FirstOrDefault().DireccionOrigen, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group has-danger">
+                        @Html.LabelFor(model => model.FirstOrDefault().LocacionDestinoID, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <select class="form-control" id="LocacionDestinoID" name="LocacionDestinoID">
+                                <option value="">Seleccionar...</option>
+                                @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.LocacionDestinoID)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-danger" id="divDireccionDestinoOtro" style="display:none">
+                        @Html.LabelFor(model => model.FirstOrDefault().DireccionDestino, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FirstOrDefault().DireccionDestino, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionDestino" } })
+                            @Html.ValidationMessageFor(model => model.FirstOrDefault().DireccionDestino, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group has-danger">
+                        @Html.LabelFor(model => model.FirstOrDefault().FechaHora, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="m_datetimepicker_1" readonly="" placeholder="Elige fecha y hora" name="FechaHora">
+                        </div>
+                    </div>
+
+                    <div class="form-group has-danger">
+                        @Html.LabelFor(model => model.FirstOrDefault().DuracionVuelo, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <span class="form-control text-box single-line" id="spnDuracionVuelo"></span>
+                            <input data-val="true" id="hfdDuracionVuelo" name="DuracionVuelo" type="hidden" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstOrDefault().Equipaje, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                <input class="check-box" data-val="true" id="cbxEquipaje" name="Equipaje" type="checkbox" value="true" />
+                                <input name="Equipaje" type="hidden" value="false" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-danger">
+                        @Html.LabelFor(model => model.FirstOrDefault().TotalPasajeros, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <div class="input-group bootstrap-touchspin">
+                                <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                                <input id="m_touchspin_1" type="text" class="form-control" value="1" name="TotalPasajeros" placeholder="Select time" style="display: block;" readonly="readonly" />
+                                <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-danger">
+                        @Html.LabelFor(model => model.FirstOrDefault().Comentario, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <input class="form-control text-box single-line" data-val="true" id="txtComentario" name="Comentario" type="text" value="" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstOrDefault().Status, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-10">
+                            <div class="m-radio-list">
+                                <label id="lblStatus" class="m-radio m-radio--solid m-radio--state-warning">
+                                    <input type="radio" id="rbnStatus" name="StatusID" value="1" checked="checked"> <span></span> <label id="lblStatusText">Pendiente</label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <input type="submit" value="Agregar" class="btn btn-dark" id="btnAgregar">
+
+                        <a href="#" id="btnCancelar">Cancelar</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!--END: Modal-->
+<!--BEGIN: Content-->
+<div class="m-content">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered" id="m_portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="flaticon-calendar-3"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                Mi calendario de reservaciones
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="#" id="btnNuevaReservacion" class="btn btn-dark m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air">
+                                    <span>
+                                        <i class="la la-plus"></i>
+                                        <span>Nueva reservación</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <div id="m_calendar"></div>
+                </div>
+            </div>
+
+            <!--end::Portlet-->
+        </div>
+    </div>
+</div>
+<!--END: Content-->
+
+@section Scripts {
+    <script>
+        var calendario;
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('m_calendar');
+
+            calendario = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['interaction', 'dayGrid', 'timeGrid'],
+                selectable: true,
+                editable: false,
+                droppable: false,
+                locale: "es",
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: ''
+                },
+                events: [
+                    @foreach (var item in Model)
+                    {
+                    <text>
+                    {
+                        title: "@item.LocacionOrigen.Nombre",
+                        start: "@item.FechaHora.ToString("yyyy-MM-ddTHH:mm:ss")",
+                        className: "m-fc-event--@item.Status.Class"
+                    },
+                    </text>
+                    }
+                ],
+                dateClick: function (info) {
+                                show_m_modal_1(info.dateStr);
+                            },
+                eventClick: function (info) {
+                                //show_m_modal_1(info.event.start);
+                        }
+                    });
+
+            calendario.render();
+        });
+
+        function addEventToCalendar() {
+            var fechaHora = $("#m_datetimepicker_1").val();
+            var titutlo = $("#LocacionOrigenID option:selected").text();
+
+            addEvent(fechaHora, titutlo);
+            $("#m_modal_1").modal("hide");
+        }
+
+        function addEvent(fechaHora, titulo) {
+            var _date = (new Date(fechaHora)).toISOString();
+            var _type = ($("#rbnStatus").val() == "1") ? "warning" : "danger";
+            var _class = "fc-day-grid-event fc-h-event fc-event fc-start fc-end m-fc-event--" + _type + " fc-draggable";
+
+            calendario.addEvent({
+                title: titulo,
+                start: _date,
+                allDay: false,
+                className: _class
+            });
+        }
+
+        function reset_m_modal_1(dateTime) {
+            $("#LocacionOrigenID").val("");
+            $("#LocacionDestinoID").val("");
+            $("#m_datetimepicker_1").val(formatDate(dateTime));
+            $("#txtDuracionVuelo").val("");
+            $("#cbxEquipaje").prop('checked', '');
+            $("#m_touchspin_1").val("1");
+            $("#txtComentario").val("");
+        };
+
+        function show_m_modal_1(dateTime) {
+            reset_m_modal_1(dateTime);
+
+            $("#m_modal_1").modal("show");
+        }
+
+        function formatDate(dateTime) {
+            if (dateTime instanceof Date)
+                var _dateTime = dateTime;
+            else
+                var _dateTime = (dateTime) ? new Date(dateTime.replace("-", "/")) : new Date();
+
+            var year = _dateTime.getFullYear();
+            var month = (_dateTime.getMonth() + 1).toString().padStart(2, '0');
+            var day = _dateTime.getDate().toString().padStart(2, '0');
+            var hours = _dateTime.getHours().toString().padStart(2, '0');
+            var minutes = _dateTime.getMinutes().toString().padStart(2, '0');
+
+            return year + "/" + month + "/" + day + " " + hours + ":" + minutes;
+        }
+
+        $.validator.addMethod("valueNotEquals", function (value, element, arg) {
+            return arg != element.value;
+        }, "Value must not equal arg.");
+
+        $(document).ready(function () {
+            $("#btnAgregar").click(function (e) {
+                e.preventDefault();
+                var a = $(this),
+                    l = $(this).closest("form");
+                l.validate({
+                    rules: {
+                        LocacionOrigenID: { required: true },
+                        DireccionOrigen: { required: true },
+                        LocacionDestinoID: { required: true },
+                        DireccionDestino: { required: true },
+                        FechaHora: { required: true, date: true },
+                        DuracionVuelo: { required: true, digits: true },
+                        TotalPasajeros: { required: true, min: 1, max: 5, digits: true },
+                        Comentario: { required: true }
+                    },
+                    messages: {
+                        LocacionOrigenID: { required: "La locaci&oacute;n de origen es requerida" },
+                        DireccionOrigen: { required: "La direcci&oacute;n de origen es requerida." },
+                        LocacionDestinoID: { required: "La locaci&oacute;n de destino es requerida" },
+                        DireccionDestino: { required: "La direcci&oacute;n de destino es requerida" },
+                        FechaHora: { required: "La fecha es requerida", date: "El formato de fecha debe ser aaaa/mm/dd hh:mm" },
+                        DuracionVuelo: { required: "La duraci&oacute;n del vuelo es requerida", digits: "Favor de ingresar s&oacute;lo d&iacute;gitos" },
+                        TotalPasajeros: { required: "El total de pasajeros es requerido", min: "Favor de indicar m&iacute;nimo un pasajero", max: "Favor de indicar m&aacute;ximo cinco pasajeros", digits: "Favor de ingresar s&oacute;lo d&iacute;gitos" },
+                        Comentario: { required: "Los comentarios son requeridos." }
+                    }
+                }),
+                    l.valid() &&
+                    (a
+                        .addClass("m-loader m-loader--right m-loader--light")
+                        .attr("disabled", !0),
+                        l.ajaxSubmit({
+                            url: "Cliente", type: "post",
+                            data: l.serialize(),
+                            success: function (data) {
+                                if (data.status) {
+                                    addEventToCalendar();
+                                    a.removeClass("m-loader m-loader--right m-loader--light").removeAttr("disabled");
+                                } else {
+                                    mUtil.scrollTo("m_form_1", -200), swal({
+                                        title: data.title,
+                                        text: data.msg,
+                                        type: "error",
+                                        confirmButtonClass: "btn btn-secondary m-btn m-btn--wide",
+                                        onClose: function (e) {
+                                            a.removeClass("m-loader m-loader--right m-loader--light").removeAttr("disabled");
+                                        }
+                                    });
+                                }
+                            }
+                        }));
+            })
+
+            $("#btnNuevaReservacion").click(function () {
+                show_m_modal_1();
+            });
+
+            $("#btnCancelar").click(function () {
+                $("#m_modal_1").modal("hide");
+            });
+
+            $("#LocacionOrigenID").change(function () {
+                if ($("#LocacionOrigenID").val() == "0") {
+                    $("#txtDireccionOrigen").val(""),
+                    $("#divDireccionOrigenOtro").fadeIn();
+                } else {
+                    $("#divDireccionOrigenOtro").fadeOut(),
+                    $("#txtDireccionOrigen").val($("#LocacionOrigenID option:selected").text());
+                }
+
+                ActualizaStatus();
+
+                ObtenerDuracion();
+            });
+
+            $("#LocacionDestinoID").change(function () {
+                if ($("#LocacionDestinoID").val() == "0") {
+                    $("#txtDireccionDestino").val(""),
+                    $("#divDireccionDestinoOtro").fadeIn();
+                } else {
+                    $("#divDireccionDestinoOtro").fadeOut(),
+                    $("#txtDireccionDestino").val($("#LocacionDestinoID option:selected").text());
+                }
+
+                ActualizaStatus();
+
+                ObtenerDuracion();
+            });
+
+            function ActualizaStatus() {
+                if ($("#LocacionOrigenID").val() == "0" || $("#LocacionDestinoID").val() == "0") {
+                    $("#rbnStatus").val("4"),
+                        $("#lblStatusText").text("Cotizando"),
+                        $("#lblStatus").removeClass("m-radio--state-warning"),
+                        $("#lblStatus").addClass("m-radio--state-danger");
+                } else {
+                    $("#rbnStatus").val("1"),
+                        $("#lblStatusText").text("Pendiente"),
+                        $("#lblStatus").removeClass("m-radio--state-danger"),
+                        $("#lblStatus").addClass("m-radio--state-warning");
+                }
+            }
+
+            function ObtenerDuracion() {
+                var origen = $("#LocacionOrigenID").val();
+                var destino = $("#LocacionDestinoID").val();
+
+                $("#hfdDuracionVuelo").val("0");
+                $("#spnDuracionVuelo").text("");
+
+                if (origen != null && destino != null && origen != "" && destino != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: "Duracion",
+                        data: { origenID: origen, destinoID: destino }
+                    }).done(function (data) {
+                        if (data.Duracion != "0") {
+                            $("#hfdDuracionVuelo").val(data.Duracion);
+                            $("#spnDuracionVuelo").text(data.Duracion);
+                        }
+                        }).fail(function () {
+                            console.log("Excepción al intentar obtener la duración.");
+                    });
+                };
+            }
+        });
+    </script>
+}

@@ -1,0 +1,252 @@
+﻿@model SolutionCoreAeroHelix.Models.Reservacion
+
+@{
+    ViewBag.Title = "Registro de Reservaciones";
+    Layout = "~/Views/Shared/_MasterAdmin.cshtml";
+}
+
+
+
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">Reservaciones</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-calendar"></i>
+                    </a>
+                </li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Registro de reservaciones</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                <span class="m-subheader__daterange-label">
+                    <span class="m-subheader__daterange-title"></span>
+                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                </span>
+                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                    <i class="la la-angle-down"></i>
+                </a>
+
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="col-lg-6">
+        <!--begin::Portlet-->
+        <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <span class="m-portlet__head-icon">
+                            <i class="flaticon-calendar"></i>
+                        </span>
+                        <h3 class="m-portlet__head-text">
+                            Detalle de reservación
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            @using (Html.BeginForm("Create", "Reservaciones",
+                new { ReturnUrl = ViewBag.ReturnUrl },
+                FormMethod.Post, new { @class = "m-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="m-portlet__body">
+                    <div class="m-form__section m-form__section--first">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group has-danger">
+                            @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                <select class="form-control" id="UsuarioID" name="UsuarioID">
+                                    <option value="">Seleccionar...</option>
+                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.UsuarioID)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessage("UsuarioID", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group has-danger">
+                            @Html.LabelFor(model => model.LocacionOrigenID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                <select class="form-control" id="LocacionOrigenID" name="LocacionOrigenID">
+                                    <option value="">Seleccionar...</option>
+                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.LocacionOrigenID)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessage("LocacionOrigenID", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group has-danger" id="divDireccionOrigenOtro" style="display:none">
+                            @Html.LabelFor(model => model.DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DireccionOrigen, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionOrigen" } })
+                                @Html.ValidationMessageFor(model => model.DireccionOrigen, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group has-danger">
+                            @Html.LabelFor(model => model.LocacionDestinoID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                <select class="form-control" id="LocacionDestinoID" name="LocacionDestinoID">
+                                    <option value="">Seleccionar...</option>
+                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.LocacionDestinoID)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessage("LocacionDestinoID", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group has-danger" id="divDireccionDestinoOtro" style="display:none">
+                            @Html.LabelFor(model => model.DireccionDestino, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DireccionDestino, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionDestino" } })
+                                @Html.ValidationMessageFor(model => model.DireccionDestino, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="m_datetimepicker_1" readonly placeholder="Elige fecha y hora" name="FechaHora" />
+                                @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DuracionVuelo, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DuracionVuelo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DuracionVuelo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Equipaje, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Equipaje)
+                                    @Html.ValidationMessageFor(model => model.Equipaje, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TotalPasajeros, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                <input id="m_touchspin_1" type="text" class="form-control" value="1" name="TotalPasajeros" placeholder="Select time">
+                                @Html.ValidationMessageFor(model => model.TotalPasajeros, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                                @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StatusID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-10">
+                                @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+                                <div class="m-radio-list">
+                                    <label class="m-radio m-radio--solid m-radio--state-warning">
+                                        <input type="radio" name="StatusID" value="1" checked="checked" onclick="alert(1);"> Pendiente
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="hdnLocacionOrigenID" name="hdnLocacionOrigenID" value="0">
+                <input type="hidden" id="hdnLocacionDestinoID" name="hdnLocacionDestinoID" value="0">
+
+                <div class="m-portlet__foot m-portlet__foot--fit">
+                    <div class="m-form__actions m-form__actions">
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Agregar" class="btn btn-dark" onclick="ValidaDirecciones();" />
+
+                                @Html.ActionLink("Cancelar", "Index")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!--end::Portlet-->
+
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#LocacionOrigenID").change(function () {
+                if ($("#LocacionOrigenID").val() == "0") {
+                    $("#txtDireccionOrigen").val("");
+                    $("#divDireccionOrigenOtro").fadeIn();
+                } else {
+                    $("#divDireccionOrigenOtro").fadeOut();
+                    $("#txtDireccionOrigen").val($("#LocacionOrigenID option:selected").text());
+                }
+                
+                ObtenerDuracion();
+            });
+
+            $("#LocacionDestinoID").change(function () {
+                if ($("#LocacionDestinoID").val() == "0") {
+                    $("#txtDireccionDestino").val("");
+                    $("#divDireccionDestinoOtro").fadeIn();
+                } else {
+                    $("#divDireccionDestinoOtro").fadeOut();
+                    $("#txtDireccionDestino").val($("#LocacionDestinoID option:selected").text());
+                }
+                
+                ObtenerDuracion();
+            });
+
+            function ObtenerDuracion() {
+                var origen = $("#LocacionOrigenID").val();
+                var destino = $("#LocacionDestinoID").val();
+
+                $("#DuracionVuelo").val("");
+
+                if (origen != null && destino != null && origen != "" && destino != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: "Duracion",
+                        data: { origenID: origen, destinoID: destino }
+                    }).done(function (data) {
+                        if (data.Duracion != "0") $("#DuracionVuelo").val(data.Duracion);
+                    }).fail(function () {
+                        console.log("Excepción al intentar obtener la duración.");
+                    });
+                };
+            }
+        });
+    </script>
+}

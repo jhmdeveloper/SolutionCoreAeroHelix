@@ -30,5 +30,13 @@ namespace SolutionCoreAeroHelix.Models
         public string HorarioServicio { get; set; }
 
         public string Geolocalizacion { get; set; }
+
+        public virtual ICollection<Ruta> RutasOrigen { get; set; }
+        public virtual ICollection<Ruta> RutasDestino { get; set; }
+
+        public virtual ICollection<Reservacion> ReservacionesOrigen { get; set; }
+        public virtual ICollection<Reservacion> ReservacionesDestino { get; set; }
+
+
     }
 }

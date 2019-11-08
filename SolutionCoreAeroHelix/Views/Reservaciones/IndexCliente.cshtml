@@ -1,0 +1,150 @@
+﻿@model IEnumerable<SolutionCoreAeroHelix.Models.Reservacion>
+
+@{
+    ViewBag.Title = "Consulta de Reservaciones";
+    Layout = "~/Views/Shared/_MasterCliente.cshtml";
+}
+
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">Reservaciones</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-calendar"></i>
+                    </a>
+                </li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Consulta de reservaciones</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                <span class="m-subheader__daterange-label">
+                    <span class="m-subheader__daterange-title"></span>
+                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                </span>
+                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                    <i class="la la-angle-down"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- nuevo estilo-->
+<div class="m-content">
+    <div class="m-portlet__body">
+
+        <!--begin: Datatable -->
+        <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <span class="m-portlet__head-icon">
+                            <i class="flaticon-calendar"></i>
+                        </span>
+                        <h3 class="m-portlet__head-text">
+                            Mis reservaciones
+                        </h3>
+                    </div>
+                </div>
+                @*<div class="m-portlet__head-tools">
+                    <ul class="m-portlet__nav">
+                        <li class="m-portlet__nav-item">
+                            <a href="../Reservaciones/Create" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                                <span>
+                                    <i class="la la-plus"></i>
+                                    <span>Nueva Reservación</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>*@
+            </div>
+            <div class="m-portlet__body">
+
+                <!--begin: Datatable -->
+                <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1">
+                    <thead>
+                        <tr>
+                            <th>
+                               
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.usuario.UserName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaHora)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalPasajeros)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StatusID)
+                            </th>
+                            <th>Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.usuario.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaHora)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalPasajeros)
+                                </td>
+                                <td>
+                                    <span class="m-badge m-badge--@item.Status.Class m-badge--wide">@item.Status.Descripcion</span>
+                                    @*@{
+            switch (item.Status)
+            {
+                case 1:
+                    <span class="m-badge m-badge--warning m-badge--wide">pendiente</span>
+                    break;
+                case 2:
+                    <span class="m-badge m-badge--success m-badge--wide">confirmada</span>
+                    break;
+                case 3:
+                    <span class="m-badge m-badge--metal m-badge--wide">cancelada</span>
+                    break;
+                case 4:
+                    <span class="m-badge m-badge--danger m-badge--wide">rechazada</span>
+
+                    break;
+                default:
+                    <span class="m-badge m-badge--info m-badge--wide">indefinido</span>
+                    break;
+            }
+        }*@
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Consultar", "DetailsCliente", new { id = item.ReservacionID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+

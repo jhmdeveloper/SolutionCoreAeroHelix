@@ -18,22 +18,36 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Capitans
         public async Task<ActionResult> Index()
         {
-            return View(await db.Capitans.ToListAsync());
+            if (Session["UserID"] != null)
+            {
+                return View(await db.Capitans.ToListAsync());
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
         }
 
         // GET: Capitans/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Capitan capitan = await db.Capitans.FindAsync(id);
+                if (capitan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(capitan);
             }
-            Capitan capitan = await db.Capitans.FindAsync(id);
-            if (capitan == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(capitan);
         }
 
         // GET: Capitans/Create
@@ -62,16 +76,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Capitans/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Capitan capitan = await db.Capitans.FindAsync(id);
+                if (capitan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(capitan);
             }
-            Capitan capitan = await db.Capitans.FindAsync(id);
-            if (capitan == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(capitan);
         }
 
         // POST: Capitans/Edit/5
@@ -93,16 +114,23 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Capitans/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Capitan capitan = await db.Capitans.FindAsync(id);
+                if (capitan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(capitan);
             }
-            Capitan capitan = await db.Capitans.FindAsync(id);
-            if (capitan == null)
+            else
             {
-                return HttpNotFound();
+                return Redirect("../Usuarios/Autenticar");
             }
-            return View(capitan);
         }
 
         // POST: Capitans/Delete/5

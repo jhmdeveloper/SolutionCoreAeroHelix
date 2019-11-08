@@ -36,5 +36,7 @@ namespace SolutionCoreAeroHelix.Models
         public int Estado { get; set; }
 
         public virtual ICollection<Usuario> usuarios { get; set; }
+
+        public virtual ICollection<Bolsa> bolsas { get; set; }
     }
 }

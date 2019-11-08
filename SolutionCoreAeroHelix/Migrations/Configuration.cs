@@ -9,7 +9,8 @@ namespace SolutionCoreAeroHelix.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(SolutionCoreAeroHelix.Models.BDConfig context)
