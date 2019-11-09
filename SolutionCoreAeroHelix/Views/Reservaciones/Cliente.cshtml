@@ -222,7 +222,7 @@
 
         function addEvent(fechaHora, titulo) {
             var _date = (new Date(fechaHora)).toISOString();
-            var _type = ($("#rbnStatus").val() == "1") ? "warning" : "danger";
+            var _type = ($("#rbnStatus").val() == "1") ? "danger" : "info";
             var _class = "fc-day-grid-event fc-h-event fc-event fc-start fc-end m-fc-event--" + _type + " fc-draggable";
 
             calendario.addEvent({
@@ -263,10 +263,6 @@
 
             return year + "/" + month + "/" + day + " " + hours + ":" + minutes;
         }
-
-        $.validator.addMethod("valueNotEquals", function (value, element, arg) {
-            return arg != element.value;
-        }, "Value must not equal arg.");
 
         $(document).ready(function () {
             $("#btnAgregar").click(function (e) {

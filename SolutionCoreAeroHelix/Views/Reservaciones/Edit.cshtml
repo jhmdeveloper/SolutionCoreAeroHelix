@@ -63,22 +63,26 @@
                         <div class="m-form__section m-form__section--first">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.ReservacionID)
-                            
+
+                            <div class="form-group m-form__group">
+                                    @Html.LabelFor(model => model.ReservacionID, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    <h2>
+                                        @Html.DisplayFor(model => model.ReservacionID)
+                                    </h2>
+                                </div>
+                            </div>
 
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Usuario solicitante</label>
                                 <div class="col-md-10">
                                     @Html.DropDownList("UsuarioID", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.UsuarioID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-
-
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Fecha y hora</label>
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.FechaHora, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
@@ -87,16 +91,14 @@
 
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.LocacionOrigenID, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Origen</label>
                                 <div class="col-md-10">
-                                    @Html.DropDownList("LocacionOrigenID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionOrigen", onchange = "ddlOrigenSelectedIndexChanged()" })
+                                    @Html.DropDownList("LocacionOrigenID", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.LocacionOrigenID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-                            <div class="form-group m-form__group" id="divDireccionOrigenOtro">
+                            <div class="form-group m-form__group" id="divDireccionOrigenOtro" style="display:none;">
                                 @Html.LabelFor(model => model.DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Origen detalle dirección</label>
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.DireccionOrigen, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionOrigen" } })
                                     @Html.ValidationMessageFor(model => model.DireccionOrigen, "", new { @class = "text-danger" })
@@ -105,16 +107,14 @@
 
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.LocacionDestinoID, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Destino</label>
                                 <div class="col-md-10">
-                                    @Html.DropDownList("LocacionDestinoID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionDestino", onchange = "ddlDestinoSelectedIndexChanged()" })
+                                    @Html.DropDownList("LocacionDestinoID", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.LocacionDestinoID, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
-                            <div class="form-group m-form__group" id="divDireccionDestinoOtro">
+                            <div class="form-group m-form__group" id="divDireccionDestinoOtro" style="display:none;">
                                 @Html.LabelFor(model => model.DireccionDestino, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Destino detalle dirección</label>
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.DireccionDestino, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionDestino" } })
                                     @Html.ValidationMessageFor(model => model.DireccionDestino, "", new { @class = "text-danger" })
@@ -123,7 +123,6 @@
 
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.DuracionVuelo, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Duración estimada del vuelo (mins)</label>
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.DuracionVuelo, new { htmlAttributes = new { @class = "form-control", id = "txtDuracionVuelo" } })
                                     @Html.ValidationMessageFor(model => model.DuracionVuelo, "", new { @class = "text-danger" })
@@ -132,7 +131,6 @@
 
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.TotalPasajeros, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Total de pasajeros</label>
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.TotalPasajeros, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.TotalPasajeros, "", new { @class = "text-danger" })
@@ -141,7 +139,6 @@
 
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.Equipaje, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Requiere equipaje</label>
                                 <div class="col-md-10">
                                     <div class="checkbox">
                                         @Html.EditorFor(model => model.Equipaje)
@@ -152,7 +149,6 @@
 
                             <div class="form-group m-form__group">
                                 @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-12" })
-                                <label for="example_input_full_name">Comentarios</label>
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                                     @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
@@ -168,20 +164,17 @@
                                             <input type="radio" name="StatusID" value="2" checked="checked"> Confirmar
                                             <span></span>
                                         </label>
-                                        <label class="m-radio m-radio--solid m-radio--state-metal">
+                                        <label class="m-radio m-radio--solid m-radio--state-warning">
                                             <input type="radio" name="StatusID" value="3"> Cancelar
                                             <span></span>
                                         </label>
-                                        <label class="m-radio m-radio--solid m-radio--danger">
+                                        <label class="m-radio m-radio--solid m-radio--state-info">
                                             <input type="radio" name="StatusID" value="4"> Cotizando
                                             <span></span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
-
-                            <input type="hidden" id="hdnLocacionOrigenID" name="hdnLocacionOrigenID" value="0">
-                            <input type="hidden" id="hdnLocacionDestinoID" name="hdnLocacionDestinoID" value="0">
 
                         </div>
                         <div class="m-portlet__foot m-portlet__foot--fit">
@@ -228,15 +221,16 @@
                         <div class="m-timeline-2">
                             <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
 
-                                @foreach (var item in ViewBag.Comentarios){
-                                <div class="m-timeline-2__item">
-                                    <span class="m-widget4__sub">@item.Fecha.ToString("dd/MM/yy")</span>
-                                    <span class="m-timeline-2__item-time">@item.Fecha.ToString("HH:mm")</span>
-                                    <div class="m-timeline-2__item-cricle">
-                                        <i class="fa fa-genderless m--font-@item.Status.Class"></i>
+                                @foreach (var item in ViewBag.Comentarios)
+                                {
+                                    <div class="m-timeline-2__item">
+                                        <span class="m-widget4__sub">@item.Fecha.ToString("dd/MM/yy")</span>
+                                        <span class="m-timeline-2__item-time">@item.Fecha.ToString("HH:mm")</span>
+                                        <div class="m-timeline-2__item-cricle">
+                                            <i class="fa fa-genderless m--font-@item.Status.Class"></i>
+                                        </div>
+                                        <div class="m-timeline-2__item-text m--padding-top-5 m--padding-bottom-30 m--padding-top-20">@item.Comentario</div>
                                     </div>
-                                    <div class="m-timeline-2__item-text m--padding-top-5 m--padding-bottom-30 m--padding-top-20">@item.Comentario</div>
-                                </div>
                                 }
 
                             </div>
@@ -254,80 +248,78 @@
 </div>
 
 
-<script type="text/javascript">
+@section Scripts {
+    <script type="text/javascript">
 
-   
-    function ddlOrigenSelectedIndexChanged() {
-        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
-        var o = document.getElementById("ddlLocacionOrigen");
-        var locOrigenValue = o.options[o.selectedIndex].value;
-        document.getElementById("hdnLocacionOrigenID").value = locOrigenValue;
-        var hdnOrigenValue = document.getElementById("hdnLocacionOrigenID").value;
+        $(document).ready(function () {
+            $("#LocacionOrigenID").change(function () {
+                if ($("#LocacionOrigenID").val() == "0") {
+                    $("#txtDireccionOrigen").val(""),
+                    $("#divDireccionOrigenOtro").fadeIn();
+                } else {
+                    $("#divDireccionOrigenOtro").fadeOut(),
+                        $("#txtDireccionOrigen").val($("#LocacionOrigenID option:selected").text());
+                }
 
-        if (hdnOrigenValue == 0) {
-            alert('Debes capturar una dirección origen.');
-            $("#divDireccionOrigenOtro").show("slow", function () {
-                enviaDireccionOrigen('');
+                ActualizaStatus();
+
+                if (!arguments[0]) ObtenerDuracion();
             });
-        }
-        else {
-            $("#divDireccionOrigenOtro").hide("slow", function () {
-                enviaDireccionOrigen(o.options[o.selectedIndex].text);
+            if ($("#LocacionOrigenID").val() == "0") {
+                    $("#divDireccionOrigenOtro").fadeIn();
+            } else {
+                $("#divDireccionOrigenOtro").fadeOut();
+            }
+
+            $("#LocacionDestinoID").change(function () {
+                if ($("#LocacionDestinoID").val() == "0") {
+                    $("#txtDireccionDestino").val(""),
+                    $("#divDireccionDestinoOtro").fadeIn();
+                } else {
+                    $("#divDireccionDestinoOtro").fadeOut(),
+                        $("#txtDireccionDestino").val($("#LocacionDestinoID option:selected").text());
+                }
+
+                ActualizaStatus();
+
+                ObtenerDuracion();
             });
-        }
+            if ($("#LocacionDestinoID").val() == "0") {
+                    $("#divDireccionDestinoOtro").fadeIn();
+            } else {
+                $("#divDireccionDestinoOtro").fadeOut();
+            }
 
-        ObtenerDuracion();
-    };
+            function ActualizaStatus() {
+                $('[name="StatusID"]').removeAttr('checked');
 
-    function ddlDestinoSelectedIndexChanged() {
+                if ($("#LocacionOrigenID").val() == "0" || $("#LocacionDestinoID").val() == "0") {
+                    $("input[name=StatusID][value=4]").attr('checked', 'checked');
+                } else {
+                    $("input[name=StatusID][value=2]").attr('checked', 'checked');
+                }
+            }
 
-        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
-        var d = document.getElementById("ddlLocacionDestino");
-        var locDestinoValue = d.options[d.selectedIndex].value;
-        document.getElementById("hdnLocacionDestinoID").value = locDestinoValue;
-        var hdnDestinoValue = document.getElementById("hdnLocacionDestinoID").value;
+            function ObtenerDuracion() {
+                console.log("ObtenerDuracion");
+                var origen = $("#LocacionOrigenID").val();
+                var destino = $("#LocacionDestinoID").val();
 
-        if (hdnDestinoValue == 0) {
-            alert('Debes capturar una dirección destino.');
-            $("#divDireccionDestinoOtro").show("slow", function () {
-                enviaDireccionDestino('');
-            });
-        }
-        else {
-            $("#divDireccionDestinoOtro").hide("slow", function () {
-                enviaDireccionDestino(d.options[d.selectedIndex].text);
-            });
-        }
+                $("#txtDuracionVuelo").val("");
 
-        ObtenerDuracion();
-    };
-
-    function enviaDireccionOrigen(direccion) {
-        document.getElementById("txtDireccionOrigen").value = direccion;
-    }
-
-    function enviaDireccionDestino(direccion) {
-        document.getElementById("txtDireccionDestino").value = direccion;
-    }
-    
-    function ObtenerDuracion() {
-        var origen = $("#ddlLocacionOrigen").val();
-        var destino = $("#ddlLocacionDestino").val();
-
-        $("#txtDuracionVuelo").val("");
-
-        if (origen != null && destino != null && origen != "" && destino != "") {
-            $.ajax({
-                method: "GET",
-                url: "../Duracion",
-                data: { origenID: origen, destinoID: destino }
-            }).done(function (data) {
-                if (data.Duracion != "0") $("#txtDuracionVuelo").val(data.Duracion);
-            }).fail(function () {
-                //alert("error");
-            });
-        };
-    }
-
-</script>
-
+                if (origen != null && destino != null && origen != "" && destino != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: "../Duracion",
+                        data: { origenID: origen, destinoID: destino }
+                    }).done(function (data) {
+                        if (data.Duracion != "0") $("#txtDuracionVuelo").val(data.Duracion);
+                    }).fail(function () {
+                        console.log("Excepción al intentar obtener la duración.");
+                    });
+                };
+                console.log("fin");
+            }
+        });
+    </script>
+}
