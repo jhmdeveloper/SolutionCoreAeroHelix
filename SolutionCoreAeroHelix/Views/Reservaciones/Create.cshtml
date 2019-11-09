@@ -14,12 +14,12 @@
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
                     <a href="#" class="m-nav__link m-nav__link--icon">
-                        <i class="m-nav__link-icon la la-home"></i>
+                        <i class="m-nav__link-icon la la-calendar"></i>
                     </a>
                 </li>
                 <li class="m-nav__item">
                     <a href="" class="m-nav__link">
-                        <span class="m-nav__link-text">Registro</span>
+                        <span class="m-nav__link-text">Registro de reservaciones</span>
                     </a>
                 </li>
             </ul>
@@ -42,15 +42,15 @@
 <div class="m-content">
     <div class="col-lg-6">
         <!--begin::Portlet-->
-        <div class="m-portlet">
+        <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
-                        <span class="m-portlet__head-icon m--hide">
-                            <i class="la la-gear"></i>
+                        <span class="m-portlet__head-icon">
+                            <i class="flaticon-calendar"></i>
                         </span>
                         <h3 class="m-portlet__head-text">
-                            Información de Reservación
+                            Detalle de reservación
                         </h3>
                     </div>
                 </div>
@@ -64,57 +64,67 @@
                     <div class="m-form__section m-form__section--first">
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.UsuarioID, "UsuarioID", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="form-group has-danger">
+                            @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @Html.DropDownList("UsuarioID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.UsuarioID, "", new { @class = "text-danger" })
+                                <select class="form-control" id="UsuarioID" name="UsuarioID">
+                                    <option value="">Seleccionar...</option>
+                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.UsuarioID)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessage("UsuarioID", new { @class = "text-danger" })
                             </div>
                         </div>
 
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LocacionOrigenID, "LocacionOrigenID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="form-group has-danger">
+                            @Html.LabelFor(model => model.LocacionOrigenID, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @Html.DropDownList("LocacionOrigenID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionOrigen", onchange = "ddlOrigenSelectedIndexChanged()" })
-                                @Html.ValidationMessageFor(model => model.LocacionOrigenID, "", new { @class = "text-danger" })
+                                <select class="form-control" id="LocacionOrigenID" name="LocacionOrigenID">
+                                    <option value="">Seleccionar...</option>
+                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.LocacionOrigenID)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessage("LocacionOrigenID", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group" id="divDireccionOrigenOtro" style="display:none">
-                            @Html.LabelFor(model => model.DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="form-group has-danger" id="divDireccionOrigenOtro" style="display:none">
+                            @Html.LabelFor(model => model.DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.DireccionOrigen, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionOrigen" } })
                                 @Html.ValidationMessageFor(model => model.DireccionOrigen, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LocacionDestinoID, "LocacionDestinoID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="form-group has-danger">
+                            @Html.LabelFor(model => model.LocacionDestinoID, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @Html.DropDownList("LocacionDestinoID", null, htmlAttributes: new { @class = "form-control", id = "ddlLocacionDestino", onchange = "ddlDestinoSelectedIndexChanged()" })
-                                @Html.ValidationMessageFor(model => model.LocacionDestinoID, "", new { @class = "text-danger" })
+                                <select class="form-control" id="LocacionDestinoID" name="LocacionDestinoID">
+                                    <option value="">Seleccionar...</option>
+                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.LocacionDestinoID)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessage("LocacionDestinoID", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group" id="divDireccionDestinoOtro" style="display:none">
-                            @Html.LabelFor(model => model.DireccionDestino, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="form-group has-danger" id="divDireccionDestinoOtro" style="display:none">
+                            @Html.LabelFor(model => model.DireccionDestino, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.DireccionDestino, new { htmlAttributes = new { @class = "form-control", id = "txtDireccionDestino" } })
                                 @Html.ValidationMessageFor(model => model.DireccionDestino, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        @*<div class="form-group">
-            @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaHora, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
                                 <input type="text" class="form-control" id="m_datetimepicker_1" readonly placeholder="Elige fecha y hora" name="FechaHora" />
                                 @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
@@ -122,7 +132,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.DuracionVuelo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.DuracionVuelo, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.DuracionVuelo, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.DuracionVuelo, "", new { @class = "text-danger" })
@@ -130,7 +140,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Equipaje, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Equipaje, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
                                 <div class="checkbox">
                                     @Html.EditorFor(model => model.Equipaje)
@@ -140,30 +150,28 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.TotalPasajeros, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.TotalPasajeros, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @*@Html.EditorFor(model => model.TotalPasajeros, new { htmlAttributes = new { @class = "form-control" } })*@
-                                <input id="m_touchspin_1" type="text" class="form-control" value="1" name="TotalPasajeros" placeholder="Select time" type="text">
+                                <input id="m_touchspin_1" type="text" class="form-control" value="1" name="TotalPasajeros" placeholder="Select time">
                                 @Html.ValidationMessageFor(model => model.TotalPasajeros, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Comentarios, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                                @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.StatusID, htmlAttributes: new { @class = "control-label col-md-12" })
                             <div class="col-md-10">
-                                @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })*@
-                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
                                 <div class="m-radio-list">
                                     <label class="m-radio m-radio--solid m-radio--state-warning">
-                                        <input type="radio" name="Status" value="1" checked="checked" onclick="alert(1);"> Pendiente
+                                        <input type="radio" name="StatusID" value="1" checked="checked" onclick="alert(1);"> Pendiente
                                         <span></span>
                                     </label>
                                 </div>
@@ -179,7 +187,7 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Agregar" class="btn btn-primary" onclick="ValidaDirecciones();"/>
+                                <input type="submit" value="Agregar" class="btn btn-dark" onclick="ValidaDirecciones();" />
 
                                 @Html.ActionLink("Cancelar", "Index")
                             </div>
@@ -194,90 +202,51 @@
     </div>
 </div>
 
-
-
-<script type="text/javascript">
-
- 
-
-    function ddlOrigenSelectedIndexChanged() {
-        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
-        var o = document.getElementById("ddlLocacionOrigen");
-        var locOrigenValue = o.options[o.selectedIndex].value;
-        document.getElementById("hdnLocacionOrigenID").value = locOrigenValue;
-        var hdnOrigenValue = document.getElementById("hdnLocacionOrigenID").value;
-
-        if (hdnOrigenValue == 0) {
-            alert('Debes capturar una dirección origen.');
-            $("#divDireccionOrigenOtro").show("slow", function () {
-                enviaDireccionOrigen('');
-            });
-        }
-        else {
-            $("#divDireccionOrigenOtro").hide("slow", function () {
-                enviaDireccionOrigen(o.options[o.selectedIndex].text);
-            });
-        }
-        @*$.ajax({
-
-            //url: "/reservaciones/ObtenerDireccion?idDireccion=2",
-            url:'@Url.Action("ObtenerDireccion", "Reservaciones")',
-            type: 'post',
-            datatype: 'application/json',
-            data: "",
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                //alert('success');
-                //$("#partialDiv").html(data);
-                if (response.success) {
-                    alert(response.responseText);
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#LocacionOrigenID").change(function () {
+                if ($("#LocacionOrigenID").val() == "0") {
+                    $("#txtDireccionOrigen").val("");
+                    $("#divDireccionOrigenOtro").fadeIn();
                 } else {
-                    // DoSomethingElse()
-                    alert(response.responseText);
+                    $("#divDireccionOrigenOtro").fadeOut();
+                    $("#txtDireccionOrigen").val($("#LocacionOrigenID option:selected").text());
                 }
-            },
-            failure: function (data) {
-                alert('failure');
-            },
-            error: function () {
-                alert('Ajax error!');
+                
+                ObtenerDuracion();
+            });
+
+            $("#LocacionDestinoID").change(function () {
+                if ($("#LocacionDestinoID").val() == "0") {
+                    $("#txtDireccionDestino").val("");
+                    $("#divDireccionDestinoOtro").fadeIn();
+                } else {
+                    $("#divDireccionDestinoOtro").fadeOut();
+                    $("#txtDireccionDestino").val($("#LocacionDestinoID option:selected").text());
+                }
+                
+                ObtenerDuracion();
+            });
+
+            function ObtenerDuracion() {
+                var origen = $("#LocacionOrigenID").val();
+                var destino = $("#LocacionDestinoID").val();
+
+                $("#DuracionVuelo").val("");
+
+                if (origen != null && destino != null && origen != "" && destino != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: "Duracion",
+                        data: { origenID: origen, destinoID: destino }
+                    }).done(function (data) {
+                        if (data.Duracion != "0") $("#DuracionVuelo").val(data.Duracion);
+                    }).fail(function () {
+                        console.log("Excepción al intentar obtener la duración.");
+                    });
+                };
             }
-        });*@
-    };
-
-    function ddlDestinoSelectedIndexChanged() {
-      
-        //Obtiene el valor del combo LocacionOrigen y lo asigna al hidden origen
-        var d = document.getElementById("ddlLocacionDestino");
-        var locDestinoValue = d.options[d.selectedIndex].value;
-        document.getElementById("hdnLocacionDestinoID").value = locDestinoValue;
-        var hdnDestinoValue = document.getElementById("hdnLocacionDestinoID").value;
-
-        if (hdnDestinoValue == 0) {
-            alert('Debes capturar una dirección destino.');
-            $("#divDireccionDestinoOtro").show("slow", function () {
-                enviaDireccionDestino('');
-            });
-        }
-        else {
-            $("#divDireccionDestinoOtro").hide("slow", function () {
-                enviaDireccionDestino(d.options[d.selectedIndex].text);
-            });
-        }
-
-    };
-
-    function enviaDireccionOrigen(direccion) {
-        document.getElementById("txtDireccionOrigen").value = direccion;
-    }
-
-    function enviaDireccionDestino(direccion) {
-        document.getElementById("txtDireccionDestino").value = direccion;
-    }
-
-   
-
-</script>
-
-
+        });
+    </script>
+}

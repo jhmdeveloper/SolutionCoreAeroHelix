@@ -1,0 +1,199 @@
+﻿@model SolutionCoreAeroHelix.Models.Reservacion
+
+@{
+    ViewBag.Title = "Consulta de Reservaciones";
+    Layout = "~/Views/Shared/_MasterCliente.cshtml";
+}
+
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">Reservaciones</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-calendar"></i>
+                    </a>
+                </li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Detalle de reservación</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                <span class="m-subheader__daterange-label">
+                    <span class="m-subheader__daterange-title"></span>
+                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                </span>
+                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                    <i class="la la-angle-down"></i>
+                </a>
+
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="row">
+        <div class="col-lg-6">
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="flaticon-calendar"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                Detalle de reservación
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                @using (Html.BeginForm("Edit", "Reservaciones",
+                   new { ReturnUrl = ViewBag.ReturnUrl },
+                   FormMethod.Post, new { @class = "m-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ReservacionID)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.usuario.UserName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.FechaHora)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LocacionOrigenID, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.LocacionOrigen.Descripcion)
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="divDireccionOrigenOtro" style="@ViewBag.DisplayOrigen">
+                                @Html.LabelFor(model => model.DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.DireccionOrigen)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LocacionDestinoID, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.LocacionDestino.Descripcion)
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="divDireccionDestinoOtro" style="@ViewBag.DisplayDestino">
+                                @Html.LabelFor(model => model.DireccionDestino, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.DireccionDestino)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DuracionVuelo, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.DuracionVuelo)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TotalPasajeros, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(model => model.TotalPasajeros)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Equipaje, htmlAttributes: new { @class = "control-label col-md-12" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.DisplayFor(model => model.Equipaje)
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="m-portlet__foot m-portlet__foot--fit">
+                            <div class="m-form__actions m-form__actions">
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        @Html.ActionLink("Volver", "IndexCliente")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+            <!--end::Portlet-->
+        </div>
+        <!--begin: comentarios-->
+
+        <div class="col-xl-6 col-lg-12">
+
+            <!--Begin::Portlet-->
+            <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered  ">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="flaticon-chat"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                Comentarios
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <div class="m-scrollable m-scroller" data-scrollable="true" data-height="380" data-mobile-height="300" style="height: 300px; overflow: auto;">
+
+                        <!--Begin::Timeline 2 -->
+                        <div class="m-timeline-2">
+                            <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
+
+                                @foreach (var item in ViewBag.Comentarios){
+                                <div class="m-timeline-2__item">
+                                    <span class="m-widget4__sub">@item.Fecha.ToString("dd/MM/yy")</span>
+                                    <span class="m-timeline-2__item-time">@item.Fecha.ToString("HH:mm")</span>
+                                    <div class="m-timeline-2__item-cricle">
+                                        <i class="fa fa-genderless m--font-@item.Status.Class"></i>
+                                    </div>
+                                    <div class="m-timeline-2__item-text m--padding-top-5 m--padding-bottom-30 m--padding-top-20">@item.Comentario</div>
+                                </div>
+                                }
+
+                            </div>
+                        </div>
+
+                        <!--End::Timeline 2 -->
+                    </div>
+                </div>
+            </div>
+
+            <!--End::Portlet-->
+        </div>
+        <!--end: comentarios-->
+    </div>
+</div>
+

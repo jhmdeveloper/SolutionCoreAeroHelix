@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Consulta de Reservaciones";
-    Layout = "~/Views/Shared/_MasterAdmin.cshtml";
+    Layout = "~/Views/Shared/_MasterCliente.cshtml";
 }
 
 <div class="m-subheader ">
@@ -52,14 +52,14 @@
                             <i class="flaticon-calendar"></i>
                         </span>
                         <h3 class="m-portlet__head-text">
-                            Lista de de reservaciones
+                            Mis reservaciones
                         </h3>
                     </div>
                 </div>
-                <div class="m-portlet__head-tools">
+                @*<div class="m-portlet__head-tools">
                     <ul class="m-portlet__nav">
                         <li class="m-portlet__nav-item">
-                            <a href="../Reservaciones/Create" class="btn btn-dark m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                            <a href="../Reservaciones/Create" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
                                 <span>
                                     <i class="la la-plus"></i>
                                     <span>Nueva Reservación</span>
@@ -67,7 +67,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div>*@
             </div>
             <div class="m-portlet__body">
 
@@ -87,9 +87,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.TotalPasajeros)
                             </th>
-                            @*<th>
-                                @Html.DisplayNameFor(model => model.Comentarios)
-                            </th>*@
                             <th>
                                 @Html.DisplayNameFor(model => model.StatusID)
                             </th>
@@ -113,13 +110,10 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TotalPasajeros)
                                 </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.Comentarios)
-                                </td>*@
                                 <td>
                                     <span class="m-badge m-badge--@item.Status.Class m-badge--wide">@item.Status.Descripcion</span>
                                     @*@{
-            switch (item.StatusID)
+            switch (item.Status)
             {
                 case 1:
                     <span class="m-badge m-badge--warning m-badge--wide">pendiente</span>
@@ -141,7 +135,7 @@
         }*@
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Editar", "Edit", new { id = item.ReservacionID })
+                                    @Html.ActionLink("Consultar", "DetailsCliente", new { id = item.ReservacionID })
                                 </td>
                             </tr>
                         }
@@ -154,13 +148,3 @@
     </div>
 </div>
 
-
-@*<span class="m-badge m-badge--brand m-badge--wide">new</span>
-<span class="m-badge m-badge--metal m-badge--wide">pending</span>
-<span class="m-badge m-badge--primary m-badge--wide">203</span>
-<span class="m-badge m-badge--success m-badge--wide">hot</span>
-<span class="m-badge m-badge--info m-badge--wide">fixed</span>
-<span class="m-badge m-badge--warning m-badge--wide">in process</span>
-<span class="m-badge m-badge--danger m-badge--wide">completed</span>
-<span class="m-badge m-badge--focus m-badge--wide">focus</span>
-<span class="m-badge m-badge--accent m-badge--wide">accent</span>*@

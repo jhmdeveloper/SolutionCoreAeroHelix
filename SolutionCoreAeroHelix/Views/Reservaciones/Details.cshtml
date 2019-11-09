@@ -12,11 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ruta.Descripcion)
+            @Html.DisplayNameFor(model => model.DireccionOrigen)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ruta.Descripcion)
+            @Html.DisplayFor(model => model.DireccionOrigen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DireccionDestino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DireccionDestino)
         </dd>
 
         <dt>
@@ -43,20 +51,20 @@
             @Html.DisplayFor(model => model.TotalPasajeros)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Comentarios)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Comentarios)
-        </dd>
+        </dd>*@
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.StatusID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.StatusID)
         </dd>
 
     </dl>

@@ -15,6 +15,27 @@ namespace SolutionCoreAeroHelix.Controllers
     {
         private BDConfig db = new BDConfig();
 
+        /// <summary>
+        /// Identificador del usuario de la sesión actual
+        /// </summary>
+        private int UserId
+        {
+            get
+            {
+                return Convert.ToInt32(Session["UserId"]);
+            }
+        }
+        /// <summary>
+        /// Identificador del cliente de la sesión actual
+        /// </summary>
+        private int ClienteId
+        {
+            get
+            {
+                return Convert.ToInt32(Session["ClienteId"]);
+            }
+        }
+
         // GET: Bolsas
         public async Task<ActionResult> Index()
         {
@@ -35,6 +56,15 @@ namespace SolutionCoreAeroHelix.Controllers
                 return HttpNotFound();
             }
             return View(bolsa);
+        }
+
+        // GET: Bolsas/DetailsCliente
+        public async Task<ActionResult> DetailsCliente()
+        {
+            if (UserId == 0) return RedirectToAction("Autenticar", "Usuarios");
+
+            var bolsas = db.Bolsas.Include(b => b.cliente).Where(c=>c.ClienteID == ClienteId);
+            return View(await bolsas.ToListAsync());
         }
 
         // GET: Bolsas/Create

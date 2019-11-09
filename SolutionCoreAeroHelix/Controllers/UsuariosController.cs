@@ -21,7 +21,7 @@ namespace SolutionCoreAeroHelix.Controllers
         {
             if (Session["UserID"] != null)
             {
-                var usuarios = db.Usuarios.Include(u => u.cliente);
+                var usuarios = db.Usuarios.Include(u => u.Cliente);
                 return View(await usuarios.ToListAsync());
             }
             else
@@ -165,12 +165,13 @@ namespace SolutionCoreAeroHelix.Controllers
             {
                 using (db)
                 {
-                    var usr = db.Usuarios.Single(u => u.UserName == user.UserName && u.Password == user.Password);
+                    var usr = db.Usuarios.Include(c=>c.Perfil).Single(u => u.UserName == user.UserName && u.Password == user.Password);
                     if (usr != null)
                     {
-                        Session["UserID"] = user.UsuarioID.ToString();
+                        Session["UserID"] = usr.UsuarioID.ToString();
                         Session["Username"] = usr.UserName.ToString();
-                        return RedirectToAction("TableroInicial", "usuarios");
+                        Session["ClienteID"] = usr.ClienteID.ToString();
+                        return RedirectToAction(usr.Perfil.PaginaInicio, "usuarios");
                     }
                     else
                     {
@@ -180,7 +181,7 @@ namespace SolutionCoreAeroHelix.Controllers
                     return View();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 ModelState.AddModelError("UsuarioInexistente", "Usuario y/o contraseña incorrectos");
                 return View();
@@ -195,7 +196,7 @@ namespace SolutionCoreAeroHelix.Controllers
             return RedirectToAction("Autenticar", "usuarios");
         }
 
-        //Tablero Inicial Usuario
+        // GET: Usuarios/TableroInicial
         public ActionResult TableroInicial()
         {
             if (Session["UserID"] != null)
@@ -206,7 +207,21 @@ namespace SolutionCoreAeroHelix.Controllers
             {
                 return Redirect("../Usuarios/Autenticar");
             }
-            
+
+        }
+
+        // GET: Usuarios/TableroCliente
+        public ActionResult TableroCliente()
+        {
+            if (Session["UserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("../Usuarios/Autenticar");
+            }
+
         }
 
         //Demo

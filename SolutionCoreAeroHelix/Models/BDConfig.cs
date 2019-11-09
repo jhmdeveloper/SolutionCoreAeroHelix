@@ -55,5 +55,11 @@ namespace SolutionCoreAeroHelix.Models
         public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.Reservacion> Reservacions { get; set; }
 
         public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.Bolsa> Bolsas { get; set; }
+
+        public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.ComentarioReservacion> ComentarioReservacions { get; set; }
+
+        public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.Status> Status { get; set; }
+
+        public System.Data.Entity.DbSet<SolutionCoreAeroHelix.Models.Perfil> Perfils { get; set; }
     }
 }

@@ -194,11 +194,14 @@
     <Compile Include="Models\Bolsa.cs" />
     <Compile Include="Models\Capitan.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\ComentarioReservacion.cs" />
     <Compile Include="Models\Locacion.cs" />
+    <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Reservacion.cs" />
     <Compile Include="Models\Ruta.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Status.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -312,14 +315,16 @@
     <Content Include="assets\demo\default\base\style.bundle.css" />
     <Content Include="assets\demo\default\custom\crud\datatables\basic\paginations.js" />
     <Content Include="assets\demo\default\custom\crud\datatables\basic\paginations__.js" />
+    <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-datepicker.js" />
     <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-datetimepicker.js" />
+    <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-timepicker.js" />
     <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-touchspin.js" />
-    <Content Include="assets\demo\default\custom\crud\forms\widgets\bootstrap-touchspin_.js" />
     <Content Include="assets\media\img\logo\AeroHelixLogo56.png" />
     <Content Include="assets\plugins\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="assets\plugins\bootstrap\dist\js\bootstrap.bundle.min.js" />
     <Content Include="assets\plugins\bootstrap\dist\js\bootstrap.js" />
     <Content Include="assets\plugins\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="assets\plugins\bootstrap\dist\js\jquery-3.4.1.min.js" />
     <Content Include="assets\plugins\filament-fixed\fixedfixed.js" />
     <Content Include="assets\plugins\filament-sticky\fixedsticky.css" />
     <Content Include="assets\plugins\filament-sticky\fixedsticky.js" />
@@ -361,8 +366,14 @@
     <Content Include="assets\vendors\base\vendors.bundle.js" />
     <Content Include="assets\vendors\custom\datatables\datatables.bundle.css" />
     <Content Include="assets\vendors\custom\datatables\datatables.bundle.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\core\locales-all.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\core\main.min.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\daygrid\main.min.js" />
     <Content Include="assets\vendors\custom\fullcalendar\fullcalendar.bundle.css" />
     <Content Include="assets\vendors\custom\fullcalendar\fullcalendar.bundle.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\interaction\main.min.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\list\main.min.js" />
+    <Content Include="assets\vendors\custom\fullcalendar\timegrid\main.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -436,7 +447,9 @@
     <Content Include="loginaerohelix.html" />
     <Content Include="TableroControlAeroHelix_demo7.html" />
     <Content Include="TableroControlAeroHelix.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -495,6 +508,12 @@
     <Content Include="Views\Bolsas\Edit.cshtml" />
     <Content Include="Views\Bolsas\Index.cshtml" />
     <Content Include="Views\Reservaciones\CreateResrvaciones.cshtml" />
+    <Content Include="Views\Shared\_MasterCliente.cshtml" />
+    <Content Include="Views\Reservaciones\Cliente.cshtml" />
+    <Content Include="Views\Reservaciones\IndexCliente.cshtml" />
+    <Content Include="Views\Reservaciones\DetailsCliente.cshtml" />
+    <Content Include="Views\Usuarios\TableroCliente.cshtml" />
+    <Content Include="Views\Bolsas\DetailsCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

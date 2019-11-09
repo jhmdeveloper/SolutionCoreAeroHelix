@@ -1,0 +1,249 @@
+﻿@model SolutionCoreAeroHelix.Models.Usuario
+
+@{
+    ViewBag.Title = "TableroCliente";
+    Layout = "~/Views/Shared/_MasterCliente.cshtml";
+}
+
+
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title m-subheader__title--separator">Inicio</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Tablero de Control</span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span class="m-nav__link-text">Principal</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                <span class="m-subheader__daterange-label">
+                    <span class="m-subheader__daterange-title"></span>
+                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                </span>
+                <!-- <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                    <i class="la la-angle-down"></i>
+                </a> -->
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- END: Subheader -->
+<div class="m-content">
+
+    <!--Begin::Section-->
+    <div class="row">
+        <div class="col-xl-6">
+
+            <!--begin:: Widgets/Sales Stats-->
+            <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height ">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Mi consumo mensual
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+
+                    <!--begin::Widget 6-->
+                    <div class="m-widget15">
+                        <div class="m-widget15__chart" style="height:180px;">
+                            <canvas id="m_chart_sales_stats"></canvas>
+                        </div>
+
+                        <!--INICIA-->
+                        <div class="m-widget25">
+                            <div class="m-widget25--progress">
+                                <div class="m-widget25__progress">
+                                    <span class="m-widget25__progress-number">
+                                        Consumo Total
+                                    </span>
+                                    <div class="m--space-10"></div>
+                                    <span class="m-widget25__progress-number">
+                                        64%
+                                    </span>
+                                    <div class="m--space-10"></div>
+                                    <div class="progress m-progress--sm">
+                                        <div class="progress-bar m--bg-brand" role="progressbar" style="width: 64%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--TERMINA-->
+                    </div>
+
+                    <!--end::Widget 6-->
+                </div>
+            </div>
+
+            <!--end:: Widgets/Sales Stats-->
+        </div>
+        <div class="col-xl-6">
+
+            <!--begin:: Widgets/Inbound Bandwidth-->
+            <div class="m-portlet m-portlet--bordered-semi m-portlet--half-height m-portlet--fit " style="min-height: 180px">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Mis notificaciones
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <div class="m-scrollable" data-scrollable="true" data-height="180" data-mobile-height="180">
+
+                        <!--Begin::Timeline 2 -->
+                        <div class="m-timeline-2">
+                            <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
+                                <div class="m-timeline-2__item">
+                                    <div class="m-timeline-2__item-cricle">
+                                        <i class="fa fa-genderless m--font-brand"></i>
+                                    </div>
+                                    <div class="m-timeline-2__item-text  m--padding-top-5">
+                                        Requieres más horas
+                                    </div>
+                                </div>
+                                <div class="m--space-30"></div>
+                                <div class="m-timeline-2__item">
+                                    <div class="m-timeline-2__item-cricle">
+                                        <i class="fa fa-genderless m--font-brand"></i>
+                                    </div>
+                                    <div class="m-timeline-2__item-text  m--padding-top-5">
+                                        Requieres más horas
+                                    </div>
+                                </div>
+                                <div class="m--space-30"></div>
+                                <div class="m-timeline-2__item">
+                                    <div class="m-timeline-2__item-cricle">
+                                        <i class="fa fa-genderless m--font-brand"></i>
+                                    </div>
+                                    <div class="m-timeline-2__item-text  m--padding-top-5">
+                                        Requieres más horas
+                                    </div>
+                                </div>
+                                <div class="m--space-30"></div>
+                                <div class="m-timeline-2__item">
+                                    <div class="m-timeline-2__item-cricle">
+                                        <i class="fa fa-genderless m--font-brand"></i>
+                                    </div>
+                                    <div class="m-timeline-2__item-text  m--padding-top-5">
+                                        Requieres más horas
+                                    </div>
+                                </div>
+                                <div class="m--space-30"></div>
+                                <div class="m-timeline-2__item">
+                                    <div class="m-timeline-2__item-cricle">
+                                        <i class="fa fa-genderless m--font-brand"></i>
+                                    </div>
+                                    <div class="m-timeline-2__item-text  m--padding-top-5">
+                                        Requieres más horas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--End::Timeline 2 -->
+                    </div>
+                </div>
+            </div>
+
+            <!--end:: Widgets/Inbound Bandwidth-->
+            <div class="m--space-30"></div>
+
+            <!--begin:: Widgets/Outbound Bandwidth-->
+            <div class="m-portlet m-portlet--bordered-semi m-portlet--half-height m-portlet--fit " style="min-height: 180px">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Mi historial de reservaciones
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="m_widget4_tab1_content">
+                            <div class="m-scrollable" data-scrollable="true" data-height="180" style="height: 180px; overflow: hidden;">
+                                <div class="m-list-timeline m-list-timeline--skin-light">
+                                    <div class="m-list-timeline__items">
+                                        <div class="m-list-timeline__item">
+                                            <span class="m-list-timeline__badge m-list-timeline__badge--info"></span>
+                                            <span class="m-list-timeline__text">
+                                                Reservación 1
+                                            </span>
+                                            <span class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
+                                            <span class="m-list-timeline__time"></span>
+                                        </div>
+                                        <div class="m-list-timeline__item">
+                                            <span class="m-list-timeline__badge m-list-timeline__badge--info"></span>
+                                            <span class="m-list-timeline__text">
+                                                Reservación 2
+                                            </span>
+                                            <span class="m-badge m-badge--success m-badge--wide">Ejecutada</span>
+                                            <span class="m-list-timeline__time"></span>
+                                        </div>
+                                        <div class="m-list-timeline__item">
+                                            <span class="m-list-timeline__badge m-list-timeline__badge--info"></span>
+                                            <span class="m-list-timeline__text">
+                                                Reservación 3
+                                            </span>
+                                            <span class="m-badge m-badge--success m-badge--wide">Ejecutada</span>
+                                            <span class="m-list-timeline__time"></span>
+                                        </div>
+                                        <div class="m-list-timeline__item">
+                                            <span class="m-list-timeline__badge m-list-timeline__badge--info"></span>
+                                            <span class="m-list-timeline__text">
+                                                Reservación 4
+                                            </span>
+                                            <span class="m-badge m-badge--danger m-badge--wide">Cancelada</span>
+                                            <span class="m-list-timeline__time"></span>
+                                        </div>
+                                        <div class="m-list-timeline__item">
+                                            <span class="m-list-timeline__badge m-list-timeline__badge--info"></span>
+                                            <span class="m-list-timeline__text">
+                                                Reservación 5
+                                            </span>
+                                            <span class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
+                                            <span class="m-list-timeline__time"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="m_widget4_tab2_content">
+                        </div>
+                        <div class="tab-pane" id="m_widget4_tab3_content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--end:: Widgets/Outbound Bandwidth-->
+        </div>
+    </div>
+
+    <!--End::Section-->
+</div>
