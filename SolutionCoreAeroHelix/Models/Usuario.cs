@@ -8,6 +8,10 @@ namespace SolutionCoreAeroHelix.Models
 {
     public class Usuario
     {
+        public Usuario() {
+            Estado = 1;
+        }
+
         [Key]
         public int UsuarioID { get; set; }
 

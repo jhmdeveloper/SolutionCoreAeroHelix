@@ -51,6 +51,7 @@ namespace SolutionCoreAeroHelix.Controllers
             if (Session["UserID"] != null)
             {
                 ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre");
+                ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion");
                 return View();
             }
             else
@@ -65,7 +66,7 @@ namespace SolutionCoreAeroHelix.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UsuarioID,UserName,Password,ConfirmPassword,Estado,ClienteID")] Usuario usuario)
+        public async Task<ActionResult> Create([Bind(Include = "UsuarioID,UserName,Password,ConfirmPassword,Estado,ClienteID,PerfilID")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -75,6 +76,7 @@ namespace SolutionCoreAeroHelix.Controllers
             }
 
             ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre", usuario.ClienteID);
+            ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion", usuario.PerfilID);
             return View(usuario);
         }
 
@@ -94,6 +96,7 @@ namespace SolutionCoreAeroHelix.Controllers
                     return HttpNotFound();
                 }
                 ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre", usuario.ClienteID);
+                ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion", usuario.PerfilID);
                 return View(usuario);
             }
             else
@@ -107,8 +110,9 @@ namespace SolutionCoreAeroHelix.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UsuarioID,UserName,Password,ConfirmPassword,Estado,ClienteID")] Usuario usuario)
+        public async Task<ActionResult> Edit([Bind(Include = "UsuarioID,UserName,Password,ConfirmPassword,Estado,ClienteID,PerfilID")] Usuario usuario)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(usuario).State = EntityState.Modified;
@@ -116,6 +120,7 @@ namespace SolutionCoreAeroHelix.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre", usuario.ClienteID);
+            ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion", usuario.PerfilID);
             return View(usuario);
         }
 
@@ -165,7 +170,8 @@ namespace SolutionCoreAeroHelix.Controllers
             {
                 using (db)
                 {
-                    var usr = db.Usuarios.Include(c=>c.Perfil).Single(u => u.UserName == user.UserName && u.Password == user.Password);
+                    var usr = db.Usuarios.Where(c => c.Estado == 1).Include(c => c.Perfil).Single(u => u.UserName == user.UserName && u.Password == user.Password);
+                     
                     if (usr != null)
                     {
                         Session["UserID"] = usr.UsuarioID.ToString();

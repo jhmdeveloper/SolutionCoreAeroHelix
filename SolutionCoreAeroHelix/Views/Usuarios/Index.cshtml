@@ -36,10 +36,13 @@
     </div>
 </div>
 <div class="m-content">
-    <div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
+                    <span class="m-portlet__head-icon">
+                        <i class="flaticon-users-1"></i>
+                    </span>
                     <h3 class="m-portlet__head-text">
                         Lista de usuarios
                     </h3>
@@ -48,7 +51,7 @@
             <div class="m-portlet__head-tools">
                 <ul class="m-portlet__nav">
                     <li class="m-portlet__nav-item">
-                        <a href="../Usuarios/Create" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                        <a href="../Usuarios/Create" class="btn btn-dark m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
                             <span>
                                 <i class="la la-plus"></i>
                                 <span>Agregar Usuario</span>
@@ -67,12 +70,18 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.cliente.Nombre)
+                            @Html.DisplayNameFor(model => model.UsuarioID)
+                        </th>
+                        <th>
+                            Perfil
+                        </th>
+                        <th>
+                            Cliente Asociado
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.UserName)
                         </th>
-                       
+
                         <th>
                             @Html.DisplayNameFor(model => model.Estado)
                         </th>
@@ -82,42 +91,49 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.cliente.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UserName)
-                            </td>
-                           
-                            <td>
-                                @*@Html.DisplayFor(modelItem => item.Estado)*@
-                                @{
-                                    switch (item.Estado)
-                                    {
-                                        case 1:
-                                            <span class="m-badge m-badge--success m-badge--wide">activo</span>
-                                            break;
-                                        case 2:
-                                            <span class="m-badge m-badge--warning m-badge--wide">bloqueado</span>
-                                            break;
-                                        case 3:
-                                            <span class="m-badge m-badge--metal m-badge--wide">cancelada</span>
-                                            break;
-                                        case 4:
-                                            <span class="m-badge m-badge--danger m-badge--wide">inactivo</span>
+                    <tr>
+                        <td>
+                            <b>@Html.DisplayFor(modelItem => item.UsuarioID) </b>
+                        </td>
+                        <td>
+                            <b><i>@Html.DisplayFor(modelItem => item.Perfil.Descripcion)</i></b>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cliente.Nombre)
+                        </td>
 
-                                            break;
-                                        default:
-                                            <span class="m-badge m-badge--info m-badge--wide">indefinido</span>
-                                            break;
-                                    }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.Estado)*@
+                            @{
+                                switch (item.Estado)
+                                {
+                                    case 1:
+                                        <span class="m-badge m-badge--success m-badge--wide">activo</span>
+                                        break;
+                                    case 2:
+                                        <span class="m-badge m-badge--danger m-badge--wide">inactivo</span>
+                                        break;
+                                    case 3:
+                                        <span class="m-badge m-badge--metal m-badge--wide">cancelada</span>
+                                        break;
+                                    case 4:
+                                        <span class="m-badge m-badge--warning m-badge--wide">bloqueado</span>
+
+                                        break;
+                                    default:
+                                        <span class="m-badge m-badge--info m-badge--wide">indefinido</span>
+                                        break;
                                 }
-                            </td>
-                            <td>
-                                @Html.ActionLink("Ver", "Details", new { id = item.UsuarioID })
-                            </td>
-                        </tr>
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.UsuarioID })
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
