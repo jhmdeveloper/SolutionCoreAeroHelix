@@ -26,11 +26,8 @@
             <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
-                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                    <span class="m-subheader__daterange-date m--font-inverse-light"></span>
                 </span>
-                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                    <i class="la la-angle-down"></i>
-                </a>
             </span>
         </div>
     </div>
@@ -63,44 +60,30 @@
                     <div class="m-form__section m-form__section--first">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Nombre / Alias</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura nombre de locación" } })
                                 @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Descripción</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura descripción o dirección" } })
                                 @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Dirección (La que se muestra)</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura descripción o dirección" } })
                                 @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Latitud, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Latitud, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Latitud, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Longitud, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Longitud, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Longitud, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                       
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.HorarioServicio, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -110,13 +93,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Geolocalizacion, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Geolocalizacion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Geolocalizacion, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
 
 
                     </div>

@@ -8,6 +8,14 @@ namespace SolutionCoreAeroHelix.Models
 {
     public class Locacion
     {
+        public Locacion()
+        {
+            Latitud = "-1";
+            Longitud = "-1";
+            Geolocalizacion = "-1";
+        }
+
+
         [Key]
         public int LocacionID { get; set; }
 

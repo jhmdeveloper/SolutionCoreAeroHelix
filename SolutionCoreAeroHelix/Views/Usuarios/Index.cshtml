@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SolutionCoreAeroHelix.Models.Usuario>
+﻿
+@model IEnumerable<SolutionCoreAeroHelix.Models.Usuario>
 
 @{
     ViewBag.Title = "Consulta de Usuarios";
@@ -26,11 +27,8 @@
             <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
-                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                    <span class="m-subheader__daterange-date m--font-inverse-light"></span>
                 </span>
-                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                    <i class="la la-angle-down"></i>
-                </a>
             </span>
         </div>
     </div>
@@ -131,7 +129,8 @@
                             }
                         </td>
                         <td>
-                            @Html.ActionLink("Modificar", "Edit", new { id = item.UsuarioID })
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.UsuarioID }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.UsuarioID })
                         </td>
                     </tr>
                     }

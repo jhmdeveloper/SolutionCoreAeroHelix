@@ -1,7 +1,8 @@
 ﻿@model SolutionCoreAeroHelix.Models.Aeronave
 
 @{
-    Layout = null;
+    ViewBag.Title = "Consulta de Clientes";
+    Layout = "~/Views/Shared/_MasterAdmin.cshtml";
 }
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
     <title>Delete</title>
 </head>
 <body>
-    <h3>Are you sure you want to delete this?</h3>
+    <h3>¿Deseas confirmar el eliminado de está aeronave?</h3>
     <div>
         <h4>Aeronave</h4>
         <hr />
@@ -71,8 +72,8 @@
             @Html.AntiForgeryToken()
     
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                @Html.ActionLink("Regresar", "Index")
             </div>
         }
     </div>

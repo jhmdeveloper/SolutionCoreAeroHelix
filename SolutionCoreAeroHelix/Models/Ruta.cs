@@ -8,6 +8,11 @@ namespace SolutionCoreAeroHelix.Models
 {
     public class Ruta
     {
+        public Ruta()
+        {
+            Estado = 1;
+        }
+
         [Key]
         public int RutaID { get; set; }
 

@@ -26,11 +26,8 @@
             <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
-                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                    <span class="m-subheader__daterange-date m--font-inverse-light"></span>
                 </span>
-                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                    <i class="la la-angle-down"></i>
-                </a>
             </span>
         </div>
     </div>
@@ -64,25 +61,25 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Nombre del Capitán</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura el nombre del capitan" } })
                                 @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Comentarios</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura comentarios" } })
                                 @Html.ValidationMessageFor(model => model.Comentarios, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Licencia, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Licencia</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Licencia, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Licencia, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura licencia" } })
                                 @Html.ValidationMessageFor(model => model.Licencia, "", new { @class = "text-danger" })
                             </div>
                         </div>

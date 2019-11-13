@@ -8,6 +8,11 @@ namespace SolutionCoreAeroHelix.Models
 {
     public class Aeronave
     {
+        public Aeronave()
+        {
+            Estado = 1;
+        }
+
         [Key]
         public int AeronaveID { get; set; }
 

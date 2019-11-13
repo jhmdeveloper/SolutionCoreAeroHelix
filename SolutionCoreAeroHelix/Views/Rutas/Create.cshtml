@@ -26,11 +26,8 @@
             <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
-                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                    <span class="m-subheader__daterange-date m--font-inverse-light"></span>
                 </span>
-                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                    <i class="la la-angle-down"></i>
-                </a>
             </span>
         </div>
     </div>
@@ -63,15 +60,15 @@
                     <div class="m-form__section m-form__section--first">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Nombre usuario</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura una alias de la ruta" } })
                                 @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.LocacionOrigenID, "LocacionOrigenID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Locacion Origen</label>
                             <div class="col-md-10">
                                 @Html.DropDownList("LocacionOrigenID", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.LocacionOrigenID, "", new { @class = "text-danger" })
@@ -79,23 +76,17 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.LocacionDestinoID, "LocacionDestinoID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label for="example_input_full_name">Locacion Destino</label>
                             <div class="col-md-10">
                                 @Html.DropDownList("LocacionDestinoID", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.LocacionDestinoID, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        
 
                         <div class="form-group">
-                            Duración vuelo (minutos)
+                            <label for="example_input_full_name">Duración vuelo (minutos)</label>
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.Duracion, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Duracion, "", new { @class = "text-danger" })

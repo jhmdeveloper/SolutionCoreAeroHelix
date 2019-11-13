@@ -26,11 +26,8 @@
             <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
-                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                    <span class="m-subheader__daterange-date m--font-inverse-light"></span>
                 </span>
-                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                    <i class="la la-angle-down"></i>
-                </a>
             </span>
         </div>
     </div>
@@ -66,21 +63,15 @@
                 @Html.AntiForgeryToken()
 
             <div class="m-portlet__body">
-                <h4>Usuario</h4>
+                <h4>Usuario # <b>@Html.DisplayFor(model => model.UsuarioID)</b></h4>
+                <h2></h2>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.UsuarioID)
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.UsuarioID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.UsuarioID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.UsuarioID, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label for="example_input_full_name">Nombre de usuario</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
@@ -88,7 +79,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label for="example_input_full_name">Contraseña</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
@@ -96,7 +87,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label for="example_input_full_name">Confirmar Contraseña</label>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
@@ -114,7 +105,7 @@
 
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ClienteID, "ClienteID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label for="example_input_full_name">Cliente Asociado</label>
                     <div class="col-md-10">
                         @Html.DropDownList("ClienteID", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ClienteID, "", new { @class = "text-danger" })
@@ -142,7 +133,8 @@
                     </div>
                 </div>
 
-                <input type="hidden" id="Estado" name="Estado" >
+                <input type="hidden" id="Estado" name="Estado">
+                @Html.HiddenFor(model => model.Estado, new { id = "estadoBD" })
 
                 @*<div class="form-group m-form__group">
             <label for="example_input_full_name">Selecciona una acción</label>
@@ -186,15 +178,22 @@
 
 </div>
 
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (document.getElementById("estadoBD").value == 1)
+                document.getElementById("CBEstado").checked = true;
+            else
+                document.getElementById("CBEstado").checked = false;
+        });
+        function getCheckValue() {
+            var x = document.getElementById("CBEstado").checked;
+            if (x == true)
+                document.getElementById("Estado").value = 1;
+            else
+                document.getElementById("Estado").value = 2;
+        };
 
-<script type="text/javascript">
-    
-    function getCheckValue() {
-        var x = document.getElementById("CBEstado").checked;
-        if (x == true)
-            document.getElementById("Estado").value = 1;
-        else
-            document.getElementById("Estado").value = 2;
-    };
+    </script>
 
-</script>
+}

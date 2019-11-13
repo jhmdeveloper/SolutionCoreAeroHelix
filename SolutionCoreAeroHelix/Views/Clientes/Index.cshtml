@@ -28,11 +28,8 @@
             <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
-                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                    <span class="m-subheader__daterange-date m--font-inverse-light"></span>
                 </span>
-                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                    <i class="la la-angle-down"></i>
-                </a>
             </span>
         </div>
     </div>
@@ -41,7 +38,7 @@
 <!-- END: Subheader -->
 <div class="m-content">
    
-    <div class="m-portlet m-portlet--mobile">
+    <div class="m-portlet m-portlet--responsive-mobile m-portlet--warning m-portlet--head-solid-bg m-portlet--bordered">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
@@ -53,7 +50,7 @@
             <div class="m-portlet__head-tools">
                 <ul class="m-portlet__nav">
                     <li class="m-portlet__nav-item">
-                        <a href="../Clientes/Create" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                        <a href="../Clientes/Create" class="btn btn-dark m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
                             <span>
                                 <i class="la la-plus"></i>
                                 <span>Agregar Cliente</span>
@@ -147,7 +144,8 @@
                             }
                         </td>
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.ClienteID })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ClienteID }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ClienteID })
                         </td>
                     </tr>
                 }

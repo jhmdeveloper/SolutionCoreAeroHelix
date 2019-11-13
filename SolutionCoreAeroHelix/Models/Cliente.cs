@@ -6,8 +6,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SolutionCoreAeroHelix.Models
 {
+
     public class Cliente
     {
+        public Cliente()
+        {
+            Estado = 1;
+            GeoLatitud = "-1";
+            GeoLongitud = "-1";
+        }
+
         [Key]
         public int ClienteID { get; set; }
 

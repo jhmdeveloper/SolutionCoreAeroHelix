@@ -26,11 +26,8 @@
             <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
                 <span class="m-subheader__daterange-label">
                     <span class="m-subheader__daterange-title"></span>
-                    <span class="m-subheader__daterange-date m--font-brand"></span>
+                    <span class="m-subheader__daterange-date m--font-inverse-light"></span>
                 </span>
-                <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
-                    <i class="la la-angle-down"></i>
-                </a>
             </span>
         </div>
     </div>
@@ -65,7 +62,7 @@
                         <div class="form-group m-form__group">
                             <label for="example_input_full_name">Nombre del cliente</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura nombre de cliente" } })
                                 @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -73,7 +70,7 @@
                         <div class="form-group m-form__group">
                             <label for="example_input_full_name">RFC</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.RFC, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.RFC, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura RFC cliente" } })
                                 @Html.ValidationMessageFor(model => model.RFC, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -81,7 +78,7 @@
                         <div class="form-group m-form__group">
                             <label for="example_input_full_name">Correo</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura correo de cliente" } })
                                 @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -89,7 +86,7 @@
                         <div class="form-group m-form__group">
                             <label for="example_input_full_name">Teléfono de Contacto</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.TelefonoContacto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.TelefonoContacto, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura teléfono de contacto de cliente" } })
                                 @Html.ValidationMessageFor(model => model.TelefonoContacto, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -97,34 +94,12 @@
                         <div class="form-group m-form__group">
                             <label for="example_input_full_name">Dirección</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control m-input", placeholder = "Captura dirección de cliente" } })
                                 @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group m-form__group">
-                            <label for="example_input_full_name">Latitud</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.GeoLatitud, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.GeoLatitud, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group m-form__group">
-                            <label for="example_input_full_name">Longitud</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.GeoLongitud, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.GeoLongitud, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group m-form__group">
-                            <label for="example_input_full_name">Estado</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="m-portlet__foot m-portlet__foot--fit">
@@ -146,46 +121,6 @@
         <!--end::Portlet-->
 
     </div>
-    <div class="col-lg-6">
-        <!--begin::Portlet-->
-        <div class="m-portlet">
-            <div class="m-portlet__head">
-                <div class="m-portlet__head-caption">
-                    <div class="m-portlet__head-title">
-                        <span class="m-portlet__head-icon m--hide">
-                            <i class="la la-gear"></i>
-                        </span>
-                        <h3 class="m-portlet__head-text">
-                            Ubicación geográfica del cliente
-                        </h3>
-                    </div>
-                </div>
-            </div>
 
-            <!--begin::Form-->
-            <form class="m-form">
-                <div class="m-portlet__body">
-                    <div class="m-form__section m-form__section--first">
-                        <div class="form-group m-form__group">
-                            <label for="example_input_full_name">Dirección:</label>
-                            <input type="email" class="form-control m-input" placeholder="Captura nombre de usuario">
-                            <span class="m-form__help">Esta es la dirección donde se ubica el cliente</span>
-                        </div>
-                        <div class="form-group m-form__group">
-                            <label>Ubicación</label>
-                            <input type="email" class="form-control m-input" placeholder="Captura el email">
-                            <span class="m-form__help">Ubicación geográfica del cliente.</span>
-                        </div>
-
-                    </div>
-                </div>
-            </form>
-
-            <!--end::Form-->
-        </div>
-
-        <!--end::Portlet-->
-
-    </div>
 
 </div>
