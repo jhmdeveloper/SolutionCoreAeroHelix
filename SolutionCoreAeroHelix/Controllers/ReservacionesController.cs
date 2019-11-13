@@ -99,8 +99,8 @@ namespace SolutionCoreAeroHelix.Controllers
                 return HttpNotFound();
             }
             ViewBag.UsuarioID = new SelectList(db.Usuarios, "UsuarioID", "UserName", reservacion.UsuarioID);
-            ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
-            ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
+            ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
+            ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
 
             var comentarios = db.ComentarioReservacions.Where(c=>c.ReservacionID==id).ToList<ComentarioReservacion>();
             ViewBag.Comentarios = comentarios;
@@ -131,8 +131,8 @@ namespace SolutionCoreAeroHelix.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.UsuarioID = new SelectList(db.Usuarios, "UsuarioID", "UserName", reservacion.UsuarioID);
-            ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
-            ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
+            ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
+            ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
             return View(reservacion);
         }
 
@@ -196,8 +196,8 @@ namespace SolutionCoreAeroHelix.Controllers
                 return HttpNotFound();
             }
             ViewBag.UsuarioID = new SelectList(db.Usuarios, "UsuarioID", "UserName", reservacion.UsuarioID);
-            ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
-            ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
+            ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
+            ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
 
             var comentarios = db.ComentarioReservacions.Where(c => c.ReservacionID == id).Include(c=>c.Status).ToList<ComentarioReservacion>();
             ViewBag.Comentarios = comentarios;
