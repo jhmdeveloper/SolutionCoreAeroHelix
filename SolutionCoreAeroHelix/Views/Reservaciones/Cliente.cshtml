@@ -222,7 +222,7 @@
 
         function addEvent(fechaHora, titulo) {
             var _date = (new Date(fechaHora)).toISOString();
-            var _type = ($("#rbnStatus").val() == "1") ? "danger" : "info";
+            var _type = ($("#rbnStatus").val() == "1") ? "warning" : "info";
             var _class = "fc-day-grid-event fc-h-event fc-event fc-start fc-end m-fc-event--" + _type + " fc-draggable";
 
             calendario.addEvent({
@@ -358,11 +358,11 @@
                     $("#rbnStatus").val("4"),
                         $("#lblStatusText").text("Cotizando"),
                         $("#lblStatus").removeClass("m-radio--state-warning"),
-                        $("#lblStatus").addClass("m-radio--state-danger");
+                        $("#lblStatus").addClass("m-radio--state-info");
                 } else {
                     $("#rbnStatus").val("1"),
                         $("#lblStatusText").text("Pendiente"),
-                        $("#lblStatus").removeClass("m-radio--state-danger"),
+                        $("#lblStatus").removeClass("m-radio--state-info"),
                         $("#lblStatus").addClass("m-radio--state-warning");
                 }
             }
