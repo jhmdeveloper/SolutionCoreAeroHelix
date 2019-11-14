@@ -56,18 +56,6 @@
                         </h3>
                     </div>
                 </div>
-                @*<div class="m-portlet__head-tools">
-                    <ul class="m-portlet__nav">
-                        <li class="m-portlet__nav-item">
-                            <a href="../Reservaciones/Create" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
-                                <span>
-                                    <i class="la la-plus"></i>
-                                    <span>Nueva Reservación</span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>*@
             </div>
             <div class="m-portlet__body">
 
@@ -76,7 +64,7 @@
                     <thead>
                         <tr>
                             <th>
-                               
+                                @Html.DisplayNameFor(model => model.ReservacionID)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.usuario.UserName)
@@ -99,7 +87,7 @@
                         {
                             <tr>
                                 <td>
-                                   
+                                    @Html.DisplayFor(modelItem => item.ReservacionID)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.usuario.UserName)
@@ -112,27 +100,6 @@
                                 </td>
                                 <td>
                                     <span class="m-badge m-badge--@item.Status.Class m-badge--wide">@item.Status.Descripcion</span>
-                                    @*@{
-            switch (item.Status)
-            {
-                case 1:
-                    <span class="m-badge m-badge--warning m-badge--wide">pendiente</span>
-                    break;
-                case 2:
-                    <span class="m-badge m-badge--success m-badge--wide">confirmada</span>
-                    break;
-                case 3:
-                    <span class="m-badge m-badge--metal m-badge--wide">cancelada</span>
-                    break;
-                case 4:
-                    <span class="m-badge m-badge--danger m-badge--wide">rechazada</span>
-
-                    break;
-                default:
-                    <span class="m-badge m-badge--info m-badge--wide">indefinido</span>
-                    break;
-            }
-        }*@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Consultar", "DetailsCliente", new { id = item.ReservacionID })

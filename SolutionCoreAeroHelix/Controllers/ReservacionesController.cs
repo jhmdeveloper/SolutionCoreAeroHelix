@@ -14,7 +14,7 @@ namespace SolutionCoreAeroHelix.Controllers
     public class ReservacionesController : Controller
     {
         private BDConfig db = new BDConfig();
-         
+
         /// <summary>
         /// Identificador del usuario de la sesión actual
         /// </summary>
@@ -50,7 +50,7 @@ namespace SolutionCoreAeroHelix.Controllers
 
         // GET: Reservaciones/Create
         public ActionResult Create()
-        { 
+        {
             ViewBag.UsuarioID = new SelectList(db.Usuarios, "UsuarioID", "UserName");
             ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre");
             ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre");
@@ -69,10 +69,11 @@ namespace SolutionCoreAeroHelix.Controllers
                 db.Reservacions.Add(reservacion);
                 db.SaveChanges();
 
-                db.ComentarioReservacions.Add(new ComentarioReservacion {
+                db.ComentarioReservacions.Add(new ComentarioReservacion
+                {
                     ReservacionID = reservacion.ReservacionID,
                     UsuarioID = reservacion.UsuarioID,
-                    Comentario =reservacion.Comentario,
+                    Comentario = reservacion.Comentario,
                     StatusID = reservacion.StatusID
                 });
 
@@ -102,7 +103,7 @@ namespace SolutionCoreAeroHelix.Controllers
             ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
             ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
 
-            var comentarios = db.ComentarioReservacions.Where(c=>c.ReservacionID==id).ToList<ComentarioReservacion>();
+            var comentarios = db.ComentarioReservacions.Where(c => c.ReservacionID == id).ToList<ComentarioReservacion>();
             ViewBag.Comentarios = comentarios;
 
             return View(reservacion);
@@ -179,7 +180,7 @@ namespace SolutionCoreAeroHelix.Controllers
         {
             if (UserId == 0) return RedirectToAction("Autenticar", "Usuarios");
 
-            var reservacions = db.Reservacions.Include(r => r.usuario).Where(c=>c.UsuarioID == UserId).Include(r => r.LocacionDestino).Include(r => r.LocacionOrigen);
+            var reservacions = db.Reservacions.Include(r => r.usuario).Where(c => c.UsuarioID == UserId).Include(r => r.LocacionDestino).Include(r => r.LocacionOrigen);
             return View(await reservacions.ToListAsync());
         }
 
@@ -199,13 +200,50 @@ namespace SolutionCoreAeroHelix.Controllers
             ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionDestinoID);
             ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion.LocacionOrigenID);
 
-            var comentarios = db.ComentarioReservacions.Where(c => c.ReservacionID == id).Include(c=>c.Status).ToList<ComentarioReservacion>();
+            var comentarios = db.ComentarioReservacions.Where(c => c.ReservacionID == id).Include(c => c.Status).ToList<ComentarioReservacion>();
             ViewBag.Comentarios = comentarios;
 
             ViewBag.DisplayOrigen = (reservacion.LocacionOrigenID != 0) ? "display:none" : "";
             ViewBag.DisplayDestino = (reservacion.LocacionDestinoID != 0) ? "display:none" : "";
 
             return View(reservacion);
+        }
+
+        // POST: Reservaciones/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DetailsCliente([Bind(Include = "ReservacionID,UsuarioID,Comentario,StatusID")] Reservacion reservacion)
+        {
+            try
+            {
+                db.ComentarioReservacions.Add(new ComentarioReservacion
+                {
+                    ReservacionID = reservacion.ReservacionID,
+                    UsuarioID = reservacion.UsuarioID,
+                    Comentario = reservacion.Comentario,
+                    StatusID = reservacion.StatusID
+                });
+
+                await db.SaveChangesAsync();
+                return RedirectToAction("IndexCliente");
+            }
+            catch
+            {
+                Reservacion reservacion2 = await db.Reservacions.FindAsync(reservacion.ReservacionID);
+                ViewBag.UsuarioID = new SelectList(db.Usuarios, "UsuarioID", "UserName", reservacion2.UsuarioID);
+                ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion2.LocacionDestinoID);
+                ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre", reservacion2.LocacionOrigenID);
+
+                var comentarios = db.ComentarioReservacions.Where(c => c.ReservacionID == reservacion2.ReservacionID).Include(c => c.Status).ToList<ComentarioReservacion>();
+                ViewBag.Comentarios = comentarios;
+
+                ViewBag.DisplayOrigen = (reservacion2.LocacionOrigenID != 0) ? "display:none" : "";
+                ViewBag.DisplayDestino = (reservacion2.LocacionDestinoID != 0) ? "display:none" : "";
+
+                return View(reservacion2);
+            }
         }
 
         // GET: Reservaciones del cliente
