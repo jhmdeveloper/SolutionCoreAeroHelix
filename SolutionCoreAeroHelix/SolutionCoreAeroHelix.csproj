@@ -171,6 +171,7 @@
     <Compile Include="Controllers\BolsasController.cs" />
     <Compile Include="Controllers\CapitansController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocacionsController.cs" />
     <Compile Include="Controllers\ReservacionesController.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Migrations\201909170102124_AeroHelixBDInitialCreate.cs" />
     <Compile Include="Migrations\201909170102124_AeroHelixBDInitialCreate.Designer.cs">
       <DependentUpon>201909170102124_AeroHelixBDInitialCreate.cs</DependentUpon>
@@ -515,9 +517,10 @@
     <Content Include="Views\Reservaciones\DetailsCliente.cshtml" />
     <Content Include="Views\Usuarios\TableroCliente.cshtml" />
     <Content Include="Views\Bolsas\DetailsCliente.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Loggs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SolutionCoreAeroHelix.Helpers;
+using SolutionCoreAeroHelix.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using SolutionCoreAeroHelix.Models;
 
 namespace SolutionCoreAeroHelix.Controllers
 {
@@ -178,7 +177,7 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Reservaciones/IndexCliente
         public async Task<ActionResult> IndexCliente()
         {
-            if (UserId == 0) return RedirectToAction("Autenticar", "Usuarios");
+            //if (UserId == 0) return RedirectToAction("Autenticar", "Usuarios");
 
             var reservacions = db.Reservacions.Include(r => r.usuario).Where(c => c.UsuarioID == UserId).Include(r => r.LocacionDestino).Include(r => r.LocacionOrigen);
             return View(await reservacions.ToListAsync());
@@ -249,8 +248,6 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Reservaciones del cliente
         public async Task<ActionResult> Cliente()
         {
-            if (UserId == 0) return RedirectToAction("Autenticar", "Usuarios");
-
             ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre");
             ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre");
 
@@ -292,6 +289,19 @@ namespace SolutionCoreAeroHelix.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        { 
+            if (UserId == 0)
+                filterContext.Result = RedirectToAction("Autenticar", "Usuarios");
+            else
+                base.OnActionExecuting(filterContext);
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            Logger.Write(filterContext.Exception);
         }
     }
 }
