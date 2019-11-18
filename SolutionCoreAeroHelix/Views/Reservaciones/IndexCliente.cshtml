@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_MasterCliente.cshtml";
 }
 
+<h1>
+    SessionStart: @TempData["SessionStart"]
+</h1>
+
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
@@ -64,10 +68,10 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.ReservacionID)
+                                <b>@Html.DisplayNameFor(model => model.ReservacionID)</b>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.usuario.UserName)
+                                @Html.DisplayNameFor(model => model.Usuario.UserName)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.FechaHora)
@@ -87,10 +91,10 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ReservacionID)
+                                    <b>@Html.DisplayFor(modelItem => item.ReservacionID)</b>
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.usuario.UserName)
+                                    @Html.DisplayFor(modelItem => item.Usuario.UserName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FechaHora)

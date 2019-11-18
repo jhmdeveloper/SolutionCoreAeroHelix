@@ -146,41 +146,44 @@ namespace SolutionCoreAeroHelix.Controllers
         [HttpPost]
         public ActionResult Autenticar(Usuario user)
         {
-            try
+            using (db)
             {
-                using (db)
+                var usr = db.Usuarios.Where(c => c.Estado == 1).Include(c => c.Perfil).Single(u => u.UserName == user.UserName && u.Password == user.Password);
+
+                if (usr != null)
                 {
-                    var usr = db.Usuarios.Where(c => c.Estado == 1).Include(c => c.Perfil).Single(u => u.UserName == user.UserName && u.Password == user.Password);
-
-                    if (usr != null)
-                    {
-                        Session["UserID"] = usr.UsuarioID.ToString();
-                        Session["Username"] = usr.UserName.ToString();
-                        Session["ClienteID"] = usr.ClienteID.ToString();
-                        return RedirectToAction(usr.Perfil.PaginaInicio, "usuarios");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "<b>Nombre o contraseña incorrectos</b>");
-                    }
-
-                    return View();
+                    Session["UserID"] = usr.UsuarioID;
+                    Session["Username"] = usr.UserName;
+                    Session["ClienteID"] = usr.ClienteID;
+                    Session["PaginaInicio"] = usr.Perfil.PaginaInicio;
+                    Inspector.SetSessionStart();
+                    return RedirectToAction("", "Home");
                 }
-            }
-            catch(Exception ex)
-            {
-                Logger.Write(ex);
-                ModelState.AddModelError("UsuarioInexistente", "Usuario y/o contraseña incorrectos");
+                else
+                {
+                    ModelState.AddModelError("", "<b>Nombre o contraseña incorrectos</b>");
+                }
+
                 return View();
             }
         }
 
-        //Salir
+        // GET: Usuarios/LogOut
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
             Session.Abandon(); // it will clear the session at the end of request
-            return RedirectToAction("Autenticar", "usuarios");
+            Inspector.ClearSessionStart();
+
+            return RedirectToAction("Autenticar", "Usuarios");
+        }
+
+        // GET: Usuarios/Timeout
+        public ActionResult Timeout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return View();
         }
 
         // GET: Usuarios/TableroInicial
@@ -195,12 +198,6 @@ namespace SolutionCoreAeroHelix.Controllers
             return View();
         }
 
-        //Demo
-        public ActionResult Demo()
-        {
-            return View();
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -208,19 +205,6 @@ namespace SolutionCoreAeroHelix.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (UserId == 0 && filterContext.ActionDescriptor.ActionName != "Autenticar")
-                filterContext.Result = RedirectToAction("Autenticar", "Usuarios");
-            else
-                base.OnActionExecuting(filterContext);
-        }
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Logger.Write(filterContext.Exception);
         }
     }
 }

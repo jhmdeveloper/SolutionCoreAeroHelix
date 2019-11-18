@@ -4,7 +4,7 @@ var BootstrapTouchspin = {
             buttondown_class: "btn btn-secondary",
             buttonup_class: "btn btn-secondary",
             min: 1,
-            max: 5,
+            max: 3,
             step: 1,
             decimals: 0,
             boostat: 5,

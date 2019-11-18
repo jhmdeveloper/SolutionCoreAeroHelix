@@ -1,5 +1,4 @@
-﻿using SolutionCoreAeroHelix.Helpers;
-using SolutionCoreAeroHelix.Models;
+﻿using SolutionCoreAeroHelix.Models;
 using System;
 using System.Data;
 using System.Data.Entity;
@@ -28,7 +27,7 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Reservaciones
         public async Task<ActionResult> Index()
         {
-            var reservacions = db.Reservacions.Include(r => r.usuario).Include(r => r.LocacionDestino).Include(r => r.LocacionOrigen);
+            var reservacions = db.Reservacions.Include(r => r.Usuario).Include(r => r.LocacionDestino).Include(r => r.LocacionOrigen);
             return View(await reservacions.ToListAsync());
         }
 
@@ -179,7 +178,7 @@ namespace SolutionCoreAeroHelix.Controllers
         {
             //if (UserId == 0) return RedirectToAction("Autenticar", "Usuarios");
 
-            var reservacions = db.Reservacions.Include(r => r.usuario).Where(c => c.UsuarioID == UserId).Include(r => r.LocacionDestino).Include(r => r.LocacionOrigen);
+            var reservacions = db.Reservacions.Include(r => r.Usuario).Where(c => c.UsuarioID == UserId).Include(r => r.LocacionDestino).Include(r => r.LocacionOrigen);
             return View(await reservacions.ToListAsync());
         }
 
@@ -245,8 +244,8 @@ namespace SolutionCoreAeroHelix.Controllers
             }
         }
 
-        // GET: Reservaciones del cliente
-        public async Task<ActionResult> Cliente()
+        // GET: Reservaciones/CalendarioCliente
+        public async Task<ActionResult> CalendarioCliente()
         {
             ViewBag.LocacionDestinoID = new SelectList(db.Locacions, "LocacionID", "Nombre");
             ViewBag.LocacionOrigenID = new SelectList(db.Locacions, "LocacionID", "Nombre");
@@ -255,10 +254,10 @@ namespace SolutionCoreAeroHelix.Controllers
             return View(await reservacions.ToListAsync());
         }
 
-        // POST: Reservaciones/Cliente
+        // POST: Reservaciones/CalendarioCliente
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Cliente([Bind(Include = "ReservacionID,UsuarioID,FechaHora,TotalPasajeros,Comentario,StatusID,LocacionOrigenID,LocacionDestinoID,DireccionOrigen,DireccionDestino,DuracionVuelo,Equipaje")] Reservacion reservacion)
+        public async Task<ActionResult> CalendarioCliente([Bind(Include = "ReservacionID,UsuarioID,FechaHora,TotalPasajeros,Comentario,StatusID,LocacionOrigenID,LocacionDestinoID,DireccionOrigen,DireccionDestino,DuracionVuelo,Equipaje")] Reservacion reservacion)
         {
             if (UserId == 0) return Json(new { status = false, message = "La sesión finalizó o no ha sido iniciada." });
 
@@ -279,7 +278,7 @@ namespace SolutionCoreAeroHelix.Controllers
                 await db.SaveChangesAsync();
             }
 
-            return Json(new { status = true, message = "La reservación se realizó correctamente." });
+            return Json(new { status = true, message = "La reservación se realizó correctamente.", reservacionId = reservacion.ReservacionID });
         }
 
         protected override void Dispose(bool disposing)
@@ -291,17 +290,17 @@ namespace SolutionCoreAeroHelix.Controllers
             base.Dispose(disposing);
         }
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        { 
-            if (UserId == 0)
-                filterContext.Result = RedirectToAction("Autenticar", "Usuarios");
-            else
-                base.OnActionExecuting(filterContext);
-        }
+        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        //{ 
+        //    if (UserId == 0)
+        //        filterContext.Result = RedirectToAction("Autenticar", "Usuarios");
+        //    else
+        //        base.OnActionExecuting(filterContext);
+        //}
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Logger.Write(filterContext.Exception);
-        }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    Logger.Write(filterContext.Exception);
+        //}
     }
 }

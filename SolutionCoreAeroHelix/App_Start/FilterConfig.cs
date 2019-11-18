@@ -1,7 +1,5 @@
-﻿using System.Web;
+﻿using SolutionCoreAeroHelix.ActionFilters;
 using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
 
 namespace SolutionCoreAeroHelix
 {
@@ -10,6 +8,8 @@ namespace SolutionCoreAeroHelix
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new InspectSessionAttribute());
+            filters.Add(new LogErrorAttribute());
         }
     }
 }

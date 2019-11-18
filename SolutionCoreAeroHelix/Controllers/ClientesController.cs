@@ -1,5 +1,4 @@
-﻿using SolutionCoreAeroHelix.Helpers;
-using SolutionCoreAeroHelix.Models;
+﻿using SolutionCoreAeroHelix.Models;
 using System;
 using System.Data.Entity;
 using System.Net;
@@ -131,19 +130,6 @@ namespace SolutionCoreAeroHelix.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            if (UserId == 0)
-                filterContext.Result = RedirectToAction("Autenticar", "Usuarios");
-            else
-                base.OnActionExecuting(filterContext);
-        }
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Logger.Write(filterContext.Exception);
         }
     }
 }

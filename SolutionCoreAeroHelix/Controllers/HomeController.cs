@@ -8,11 +8,28 @@ namespace SolutionCoreAeroHelix.Controllers
 {
     public class HomeController : Controller
     {
+
+        /// <summary>
+        /// Página de inicio de perfil actual
+        /// </summary>
+        private string PaginaInicio
+        {
+            get
+            {
+                var paginaInicio = "";
+
+                if(Session["PaginaInicio"] != null)
+                {
+                    paginaInicio = Session["PaginaInicio"].ToString();
+                }
+
+                return paginaInicio;
+            }
+        }
+
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
-            return View();
+            return RedirectToAction(PaginaInicio, "Usuarios");
         }
     }
 }
