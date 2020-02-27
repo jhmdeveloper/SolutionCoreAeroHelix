@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SolutionCoreAeroHelix.Helpers;
+using SolutionCoreAeroHelix.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
-using System.Web.Security;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using SolutionCoreAeroHelix.Models;
+using System.Web.Security;
 
 namespace SolutionCoreAeroHelix.Controllers
 {
@@ -16,18 +15,22 @@ namespace SolutionCoreAeroHelix.Controllers
     {
         private BDConfig db = new BDConfig();
 
+        /// <summary>
+        /// Identificador del usuario de la sesión actual
+        /// </summary>
+        private int UserId
+        {
+            get
+            {
+                return Convert.ToInt32(Session["UserId"]);
+            }
+        }
+
         // GET: Usuarios
         public async Task<ActionResult> Index()
         {
-            if (Session["UserID"] != null)
-            {
-                var usuarios = db.Usuarios.Include(u => u.Cliente);
-                return View(await usuarios.ToListAsync());
-            }
-            else
-            {
-                return Redirect("../Usuarios/Autenticar");
-            }
+            var usuarios = db.Usuarios.Include(u => u.Cliente);
+            return View(await usuarios.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -48,16 +51,9 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            if (Session["UserID"] != null)
-            {
-                ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre");
-                ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion");
-                return View();
-            }
-            else
-            {
-                return Redirect("../Usuarios/Autenticar");
-            }
+            ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre");
+            ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion");
+            return View();
 
         }
 
@@ -83,26 +79,18 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Usuarios/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (Session["UserID"] != null)
+            if (id == null)
             {
-
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Usuario usuario = await db.Usuarios.FindAsync(id);
-                if (usuario == null)
-                {
-                    return HttpNotFound();
-                }
-                ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre", usuario.ClienteID);
-                ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion", usuario.PerfilID);
-                return View(usuario);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            Usuario usuario = await db.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
-                return Redirect("../Usuarios/Autenticar");
+                return HttpNotFound();
             }
+            ViewBag.ClienteID = new SelectList(db.Clientes, "ClienteID", "Nombre", usuario.ClienteID);
+            ViewBag.PerfilID = new SelectList(db.Perfils, "PerfilID", "Descripcion", usuario.PerfilID);
+            return View(usuario);
         }
 
         // POST: Usuarios/Edit/5
@@ -112,7 +100,6 @@ namespace SolutionCoreAeroHelix.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "UsuarioID,UserName,Password,ConfirmPassword,Estado,ClienteID,PerfilID")] Usuario usuario)
         {
-
             if (ModelState.IsValid)
             {
                 db.Entry(usuario).State = EntityState.Modified;
@@ -127,23 +114,16 @@ namespace SolutionCoreAeroHelix.Controllers
         // GET: Usuarios/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (Session["UserID"] != null)
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Usuario usuario = await db.Usuarios.FindAsync(id);
-                if (usuario == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(usuario);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            Usuario usuario = await db.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
-                return Redirect("../Usuarios/Autenticar");
+                return HttpNotFound();
             }
+            return View(usuario);
         }
 
         // POST: Usuarios/Delete/5
@@ -166,81 +146,56 @@ namespace SolutionCoreAeroHelix.Controllers
         [HttpPost]
         public ActionResult Autenticar(Usuario user)
         {
-            try
+            using (db)
             {
-                using (db)
-                {
-                    var usr = db.Usuarios.Where(c => c.Estado == 1).Include(c => c.Perfil).Single(u => u.UserName == user.UserName && u.Password == user.Password);
-                     
-                    if (usr != null)
-                    {
-                        Session["UserID"] = usr.UsuarioID.ToString();
-                        Session["Username"] = usr.UserName.ToString();
-                        Session["ClienteID"] = usr.ClienteID.ToString();
-                        return RedirectToAction(usr.Perfil.PaginaInicio, "usuarios");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "<b>Nombre o contraseña incorrectos</b>");
-                    }
+                var usr = db.Usuarios.Where(c => c.Estado == 1).Include(c => c.Perfil).Single(u => u.UserName == user.UserName && u.Password == user.Password);
 
-                    return View();
+                if (usr != null)
+                {
+                    Session["UserID"] = usr.UsuarioID;
+                    Session["Username"] = usr.UserName;
+                    Session["ClienteID"] = usr.ClienteID;
+                    Session["PaginaInicio"] = usr.Perfil.PaginaInicio;
+                    Inspector.SetSessionStart();
+                    return RedirectToAction("", "Home");
                 }
-            }
-            catch
-            {
-                ModelState.AddModelError("UsuarioInexistente", "Usuario y/o contraseña incorrectos");
+                else
+                {
+                    ModelState.AddModelError("", "<b>Nombre o contraseña incorrectos</b>");
+                }
+
                 return View();
             }
         }
 
-        //Salir
+        // GET: Usuarios/LogOut
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
             Session.Abandon(); // it will clear the session at the end of request
-            return RedirectToAction("Autenticar", "usuarios");
+            Inspector.ClearSessionStart();
+
+            return RedirectToAction("Autenticar", "Usuarios");
+        }
+
+        // GET: Usuarios/Timeout
+        public ActionResult Timeout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return View();
         }
 
         // GET: Usuarios/TableroInicial
         public ActionResult TableroInicial()
         {
-            if (Session["UserID"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return Redirect("../Usuarios/Autenticar");
-            }
-
+            return View();
         }
 
         // GET: Usuarios/TableroCliente
         public ActionResult TableroCliente()
         {
-            if (Session["UserID"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return Redirect("../Usuarios/Autenticar");
-            }
-
-        }
-
-        //Demo
-        public ActionResult Demo()
-        {
-            if (Session["UserID"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return Redirect("~/RecursoNoEncontrado.html");
-            }
+            return View();
         }
 
         protected override void Dispose(bool disposing)

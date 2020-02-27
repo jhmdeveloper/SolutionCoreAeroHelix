@@ -16,7 +16,7 @@
                 </button>
             </div>
 
-            @using (Html.BeginForm("Cliente", "Reservaciones",
+            @using (Html.BeginForm("CalendarioCliente", "Reservaciones",
                 new { ReturnUrl = ViewBag.ReturnUrl },
                 FormMethod.Post, new { @class = "m-login__form m-form", @id = "m_form_1" }))
             {
@@ -34,7 +34,7 @@
                             </select>
                         </div>
                     </div>
-
+                    
                     <div class="form-group has-danger" id="divDireccionOrigenOtro" style="display:none">
                         @Html.LabelFor(model => model.FirstOrDefault().DireccionOrigen, htmlAttributes: new { @class = "control-label col-md-12" })
                         <div class="col-md-10">
@@ -194,6 +194,7 @@
                     {
                     <text>
                     {
+                        id: @item.ReservacionID,
                         title: "@item.LocacionOrigen.Nombre",
                         start: "@item.FechaHora.ToString("yyyy-MM-ddTHH:mm:ss")",
                         className: "m-fc-event--@item.Status.Class"
@@ -205,27 +206,28 @@
                                 show_m_modal_1(info.dateStr);
                             },
                 eventClick: function (info) {
-                                //show_m_modal_1(info.event.start);
+                            console.log(info);
                         }
                     });
 
             calendario.render();
         });
 
-        function addEventToCalendar() {
+        function addEventToCalendar(reservacionId) {
             var fechaHora = $("#m_datetimepicker_1").val();
             var titutlo = $("#LocacionOrigenID option:selected").text();
 
-            addEvent(fechaHora, titutlo);
+            addEvent(reservacionId, fechaHora, titutlo);
             $("#m_modal_1").modal("hide");
         }
 
-        function addEvent(fechaHora, titulo) {
+        function addEvent(reservacionId, fechaHora, titulo) {
             var _date = (new Date(fechaHora)).toISOString();
-            var _type = ($("#rbnStatus").val() == "1") ? "danger" : "info";
+            var _type = ($("#rbnStatus").val() == "1") ? "warning" : "info";
             var _class = "fc-day-grid-event fc-h-event fc-event fc-start fc-end m-fc-event--" + _type + " fc-draggable";
 
             calendario.addEvent({
+                id: reservacionId,
                 title: titulo,
                 start: _date,
                 allDay: false,
@@ -267,6 +269,9 @@
         $(document).ready(function () {
             $("#btnAgregar").click(function (e) {
                 e.preventDefault();
+                mApp.block("#m_modal_1",
+                    { overlayColor: "#000000", type: "loader", state: "primary", message: "Procesando..." }
+                );
                 var a = $(this),
                     l = $(this).closest("form");
                 l.validate({
@@ -277,7 +282,7 @@
                         DireccionDestino: { required: true },
                         FechaHora: { required: true, date: true },
                         DuracionVuelo: { required: true, digits: true },
-                        TotalPasajeros: { required: true, min: 1, max: 5, digits: true },
+                        TotalPasajeros: { required: true, min: 1, max: 3, digits: true },
                         Comentario: { required: true }
                     },
                     messages: {
@@ -300,7 +305,7 @@
                             data: l.serialize(),
                             success: function (data) {
                                 if (data.status) {
-                                    addEventToCalendar();
+                                    addEventToCalendar(data.reservacionId);
                                     a.removeClass("m-loader m-loader--right m-loader--light").removeAttr("disabled");
                                 } else {
                                     mUtil.scrollTo("m_form_1", -200), swal({
@@ -314,7 +319,8 @@
                                     });
                                 }
                             }
-                        }));
+                        })),
+                    mApp.unblock("#m_modal_1")
             })
 
             $("#btnNuevaReservacion").click(function () {
@@ -358,11 +364,11 @@
                     $("#rbnStatus").val("4"),
                         $("#lblStatusText").text("Cotizando"),
                         $("#lblStatus").removeClass("m-radio--state-warning"),
-                        $("#lblStatus").addClass("m-radio--state-danger");
+                        $("#lblStatus").addClass("m-radio--state-info");
                 } else {
                     $("#rbnStatus").val("1"),
                         $("#lblStatusText").text("Pendiente"),
-                        $("#lblStatus").removeClass("m-radio--state-danger"),
+                        $("#lblStatus").removeClass("m-radio--state-info"),
                         $("#lblStatus").addClass("m-radio--state-warning");
                 }
             }

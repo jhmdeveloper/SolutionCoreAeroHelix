@@ -135,6 +135,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\LogErrorAttribute.cs" />
+    <Compile Include="ActionFilters\InspectSessionAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Controllers\BolsasController.cs" />
     <Compile Include="Controllers\CapitansController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocacionsController.cs" />
     <Compile Include="Controllers\ReservacionesController.cs" />
@@ -180,6 +183,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Inspector.cs" />
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Migrations\201909170102124_AeroHelixBDInitialCreate.cs" />
     <Compile Include="Migrations\201909170102124_AeroHelixBDInitialCreate.Designer.cs">
       <DependentUpon>201909170102124_AeroHelixBDInitialCreate.cs</DependentUpon>
@@ -445,9 +450,6 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="loginaerohelix.html" />
-    <Content Include="TableroControlAeroHelix_demo7.html" />
-    <Content Include="TableroControlAeroHelix.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -462,7 +464,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Clientes\Create.cshtml" />
     <Content Include="Views\Clientes\Delete.cshtml" />
@@ -492,7 +493,6 @@
     <Content Include="Views\Usuarios\Autenticar.cshtml" />
     <Content Include="Views\Usuarios\TableroInicial.cshtml" />
     <Content Include="Views\Shared\_MasterAdmin.cshtml" />
-    <Content Include="Views\Usuarios\Demo.cshtml" />
     <Content Include="Views\Rutas\Create.cshtml" />
     <Content Include="Views\Rutas\Delete.cshtml" />
     <Content Include="Views\Rutas\Details.cshtml" />
@@ -510,14 +510,16 @@
     <Content Include="Views\Bolsas\Index.cshtml" />
     <Content Include="Views\Reservaciones\CreateResrvaciones.cshtml" />
     <Content Include="Views\Shared\_MasterCliente.cshtml" />
-    <Content Include="Views\Reservaciones\Cliente.cshtml" />
+    <Content Include="Views\Reservaciones\CalendarioCliente.cshtml" />
     <Content Include="Views\Reservaciones\IndexCliente.cshtml" />
     <Content Include="Views\Reservaciones\DetailsCliente.cshtml" />
     <Content Include="Views\Usuarios\TableroCliente.cshtml" />
     <Content Include="Views\Bolsas\DetailsCliente.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Usuarios\Timeout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Loggs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

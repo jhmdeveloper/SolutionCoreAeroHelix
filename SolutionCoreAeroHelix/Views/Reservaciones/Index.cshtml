@@ -79,7 +79,7 @@
                                 <b>@Html.DisplayNameFor(model => model.ReservacionID)</b>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.usuario.UserName)
+                                @Html.DisplayNameFor(model => model.Usuario.UserName)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.FechaHora)
@@ -105,7 +105,7 @@
                                     <b>@Html.DisplayFor(modelItem => item.ReservacionID)</b>
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.usuario.UserName)
+                                    @Html.DisplayFor(modelItem => item.Usuario.UserName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FechaHora)
@@ -113,32 +113,8 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.TotalPasajeros)
                                 </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.Comentarios)
-                                </td>*@
                                 <td>
                                     <span class="m-badge m-badge--@item.Status.Class m-badge--wide">@item.Status.Descripcion</span>
-                                    @*@{
-            switch (item.StatusID)
-            {
-                case 1:
-                    <span class="m-badge m-badge--warning m-badge--wide">pendiente</span>
-                    break;
-                case 2:
-                    <span class="m-badge m-badge--success m-badge--wide">confirmada</span>
-                    break;
-                case 3:
-                    <span class="m-badge m-badge--metal m-badge--wide">cancelada</span>
-                    break;
-                case 4:
-                    <span class="m-badge m-badge--danger m-badge--wide">rechazada</span>
-
-                    break;
-                default:
-                    <span class="m-badge m-badge--info m-badge--wide">indefinido</span>
-                    break;
-            }
-        }*@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Editar", "Edit", new { id = item.ReservacionID })
@@ -153,14 +129,3 @@
         <!-- END EXAMPLE TABLE PORTLET-->
     </div>
 </div>
-
-
-@*<span class="m-badge m-badge--brand m-badge--wide">new</span>
-<span class="m-badge m-badge--metal m-badge--wide">pending</span>
-<span class="m-badge m-badge--primary m-badge--wide">203</span>
-<span class="m-badge m-badge--success m-badge--wide">hot</span>
-<span class="m-badge m-badge--info m-badge--wide">fixed</span>
-<span class="m-badge m-badge--warning m-badge--wide">in process</span>
-<span class="m-badge m-badge--danger m-badge--wide">completed</span>
-<span class="m-badge m-badge--focus m-badge--wide">focus</span>
-<span class="m-badge m-badge--accent m-badge--wide">accent</span>*@
