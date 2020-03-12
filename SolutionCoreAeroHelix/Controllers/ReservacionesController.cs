@@ -104,7 +104,7 @@ namespace SolutionCoreAeroHelix.Controllers
             var comentarios = db.ComentarioReservacions.Where(c => c.ReservacionID == id).Include(c => c.Usuario).ToList<ComentarioReservacion>();
             ViewBag.Comentarios = comentarios;
 
-
+            //Se agrega la referencia al username
             return View(reservacion);
         }
 
