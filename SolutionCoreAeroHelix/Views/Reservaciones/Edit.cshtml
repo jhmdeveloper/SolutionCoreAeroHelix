@@ -223,14 +223,15 @@
 
                                 @foreach (var item in ViewBag.Comentarios)
                                 {
-                                    <div class="m-timeline-2__item">
-                                        <span class="m-widget4__sub">@item.Fecha.ToString("dd/MM/yy")</span>
-                                        <span class="m-timeline-2__item-time">@item.Fecha.ToString("HH:mm")</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-@item.Status.Class"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5 m--padding-bottom-30 m--padding-top-20">@item.Comentario</div>
+                                <div class="m-timeline-2__item">
+                                    <span class="m-widget4__sub">@item.Fecha.ToString("dd/MM/yy")</span>
+                                    <span class="m-timeline-2__item-time">@item.Fecha.ToString("HH:mm")</span>
+                                    <div class="m-timeline-2__item-cricle">
+                                        <i class="fa fa-genderless m--font-@item.Status.Class"></i>
                                     </div>
+                                    <div class="m-timeline-2__item-text m--padding-top-5 m--padding-bottom-30 m--padding-top-20">@item.Comentario</div>
+                                    <div class="m-timeline-2__item-text m--padding-top-5 m--padding-bottom-30 m--padding-top-20">@item.Usuario.UserName</div>
+                                </div>
                                 }
 
                             </div>
