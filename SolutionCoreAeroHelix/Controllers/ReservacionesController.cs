@@ -104,23 +104,6 @@ namespace SolutionCoreAeroHelix.Controllers
             var comentarios = db.ComentarioReservacions.Where(c => c.ReservacionID == id).Include(c => c.Usuario).ToList<ComentarioReservacion>();
             ViewBag.Comentarios = comentarios;
 
-            //var query = from com in db.ComentarioReservacions
-            //            join usr in db.Usuarios on com.UsuarioID equals usr.UsuarioID
-            //            where com.ReservacionID == id
-            //            select new 
-            //            {
-            //                ReservacionID = com.ReservacionID,
-            //                UserName = usr.UserName,
-            //                UsuarioID = com.UsuarioID,
-            //                Comentario = com.Comentario,
-            //                Fecha = com.Fecha,
-            //                StatusID = com.StatusID
-            //            };
-
-            //var comentarios = query.ToList();
-
-            ViewBag.Comentarios = comentarios;
-
             return View(reservacion);
         }
 
