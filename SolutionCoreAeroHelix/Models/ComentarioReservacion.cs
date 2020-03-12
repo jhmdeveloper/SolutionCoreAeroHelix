@@ -24,8 +24,6 @@ namespace SolutionCoreAeroHelix.Models
         [Required(ErrorMessage = "Usuario requerido.")]
         public int UsuarioID { get; set; }
 
-        //public string UserName { get; set; }
-
         [Required(ErrorMessage = "Comentario requerido.")]
         public string Comentario { get; set; }
         
